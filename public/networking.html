@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Networking | CONSTANTLY CODING LLC</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      color: white;
+      background-color: #0b1120;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    .background-logo {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+      opacity: 0.1;
+      pointer-events: none;
+      max-width: 100%;
+      max-height: 100%;
+      width: 80%;
+      height: auto;
+      animation: fadeInBackground 10s infinite;
+    }
+
+    @keyframes fadeInBackground {
+      0% { opacity: 0.05; }
+      50% { opacity: 0.15; }
+      100% { opacity: 0.05; }
+    }
+
+    header {
+      padding: 20px;
+      text-align: center;
+      background-color: #0b1120;
+      animation: fadeIn 2s ease-in;
+    }
+
+    nav a {
+      margin: 0 15px;
+      color: #38bdf8;
+      text-decoration: none;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    section {
+      max-width: 800px;
+      margin: 80px auto 40px;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      animation: fadeIn 1.5s ease-in;
+    }
+
+    section h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5rem;
+      color: #38bdf8;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    section p {
+      font-size: 1.1rem;
+      color: #e2e8f0;
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+
+    section h2 {
+      font-size: 1.5rem;
+      color: #38bdf8;
+      margin-top: 20px;
+    }
+
+    section ul {
+      list-style-type: disc;
+      margin-left: 20px;
+      color: #e2e8f0;
+    }
+
+    footer {
+      background-color: #1e2a47;
+      color: #e2e8f0;
+      text-align: center;
+      padding: 20px;
+      font-weight: 600;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+      section h1 {
+        font-size: 2rem;
+      }
+
+      section p, section ul {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      section h1 {
+        font-size: 1.6rem;
+      }
+
+      section p, section ul {
+        font-size: 0.95rem;
+      }
+
+      footer {
+        font-size: 0.85rem;
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Optional Background Logo -->
+  <!-- <img src="your-background-logo.png" alt="Background Logo" class="background-logo" /> -->
+
+  <header>
+    <nav>
+      <a href="home.html">Home</a>
+      <a href="ticketing.html">Ticketing System</a>
+      <a href="cable-running.html">Cable Running</a>
+      <a href="app-creation.html">App/Web</a>
+      <a href="contact-us.html">Contact</a>
+    </nav>
+  </header>
+
+  <section>
+    <h1>Networking Services</h1>
+    <p>We offer comprehensive networking solutions to ensure your business stays connected and secure. Our team designs, implements, and maintains high-performance networks tailored to your needs.</p>
+
+    <h2>Our Services Include:</h2>
+    <ul>
+      <li>Custom network design and installation</li>
+      <li>Secure routing and firewall setup</li>
+      <li>Wi-Fi optimization and configuration</li>
+      <li>Network security audits and threat mitigation</li>
+      <li>24/7 monitoring and ongoing support</li>
+    </ul>
+
+    <h2>Pricing</h2>
+    <div class="service">
+      <p><span class="price">Small Business Setup:</span> $1,000–$3,500 – Router, firewall, 5 device connections</p>
+      <p><span class="price">Full Overhaul:</span> $4,500–$8,000 – Network Setup 15+ devices</p>
+      <p><span class="price">Monthly Maintenance:</span> $200–$600/month – Monitoring, updates, support</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 CONSTANTLY CODING LLC. All Rights Reserved.</p>
+  </footer>
+</body>
+</html>

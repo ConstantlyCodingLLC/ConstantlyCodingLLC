@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Make a Payment | CONSTANT CODING LLC</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #0b1120;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .home-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    .home-button button {
+      background: transparent;
+      border: 2px solid #38bdf8;
+      color: #38bdf8;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .home-button button:hover {
+      background-color: #38bdf8;
+      color: #0b1120;
+    }
+
+    .container {
+      max-width: 500px;
+      width: 100%;
+      background-color: #1e293b;
+      padding: 30px 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+      text-align: center;
+      animation: fadeIn 1.2s ease;
+      margin-top: 100px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #38bdf8;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #e2e8f0;
+      margin-bottom: 30px;
+    }
+
+    form input[type="submit"] {
+      background: #ff7a00;
+      color: #0f172a;
+      border: none;
+      padding: 14px 30px;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    form input[type="submit"]:hover {
+      background: #e76c00;
+    }
+
+    footer {
+      margin-top: auto;
+      background-color: #1e2a47;
+      color: #e2e8f0;
+      text-align: center;
+      padding: 16px;
+      font-size: 0.9rem;
+      width: 100%;
+      border-top: 1px solid #2c3e50;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px 15px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      p {
+        font-size: 0.95rem;
+      }
+
+      form input[type="submit"] {
+        width: 100%;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Home Button -->
+  <div class="home-button">
+    <button onclick="window.location.href='home.html';">HOME</button>
+  </div>
+
+  <!-- Payment Card -->
+  <div class="container">
+    <h1>Make a Payment</h1>
+    <p>Thank you for choosing CONSTANT CODING LLC.<br>Please click below to make a secure payment.</p>
+
+    <!-- PayPal Payment Button -->
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+      <input type="hidden" name="cmd" value="_s-xclick" />
+      <input type="hidden" name="hosted_button_id" value="YOUR_PAYPAL_BUTTON_ID" />
+      <input type="submit" value="Pay Now" />
+    </form>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 CONSTANT CODING LLC. All Rights Reserved.</p>
+  </footer>
+
+</body>
+
+</html>
