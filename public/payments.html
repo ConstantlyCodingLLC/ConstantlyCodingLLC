@@ -129,7 +129,7 @@
   </footer>
 
   <script>
-    const stripe = Stripe("pk_live_51RijnXARZDg2CsEHDL3TkDh9m5i8wIhHRBZOBbEXfeOlvuSiNSFn7NCQEaHX0k0YTt1nkneLlYOIiSNDFc6vXed100ilMufVed"); // Replace with your Stripe publishable key
+    const stripe = Stripe("pk_test_51RijngPTjyig6Wj6po9D8olXygyuIZM914bM6D8ndPe0t9HdgNEqRpYki5MHu0UTzBZLPLyZOnJirzu36KGmwnmk00saqfwLWp"); // Replace with your Stripe publishable key
 
     document.getElementById("pay-button").addEventListener("click", function () {
       fetch("/api/create-checkout-session", { method: "POST" })
