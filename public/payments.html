@@ -128,20 +128,5 @@
     <p>&copy; 2025 CONSTANTLY CODING LLC. All Rights Reserved.</p>
   </footer>
 
-  <script>
-    const stripe = Stripe("pk_test_51RijngPTjyig6Wj6po9D8olXygyuIZM914bM6D8ndPe0t9HdgNEqRpYki5MHu0UTzBZLPLyZOnJirzu36KGmwnmk00saqfwLWp"); // Replace with your Stripe publishable key
-
-    document.getElementById("pay-button").addEventListener("click", function () {
-      fetch("/api/create-checkout-session", { method: "POST" })
-        .then((res) => res.json())
-        .then((session) => {
-          return stripe.redirectToCheckout({ sessionId: session.id });
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-          alert("Payment failed to start. Please try again.");
-        });
-    });
-  </script>
 </body>
 </html>
