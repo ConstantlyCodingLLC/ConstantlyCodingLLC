@@ -1,4 +1,3 @@
-
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
@@ -11,7 +10,7 @@ export default async function handler(req, res) {
             price_data: {
               currency: "usd",
               product_data: {
-                name: "Constantly Coding LLC Service Payment",
+                name: "Service Payment",
               },
               unit_amount: 2500,
             },
