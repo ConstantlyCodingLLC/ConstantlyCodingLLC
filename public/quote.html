@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quote Generator | CONSTANTLY CODING LLC</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0a0a23;
+      color: #fff;
+      padding: 30px;
+    }
+
+    h1, h2 {
+      color: #38bdf8;
+      text-align: center;
+    }
+
+    form {
+      max-width: 800px;
+      margin: auto;
+      background-color: #1e293b;
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: none;
+      background: #fff;
+      color: #000;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 20px;
+      background: #111827;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid #444;
+      text-align: left;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px;
+      width: 100%;
+      background-color: #38bdf8;
+      border: none;
+      border-radius: 6px;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0ea5e9;
+    }
+
+    .total {
+      font-size: 1.2em;
+      font-weight: bold;
+      text-align: right;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Quote Generator</h1>
+  <form id="quote-form">
+    <h2>Client Info</h2>
+    <label>Full Name</label>
+    <input type="text" name="name" required />
+
+    <label>Email</label>
+    <input type="email" name="email" required />
+
+    <label>Phone</label>
+    <input type="tel" name="phone" />
+
+    <h2>Services</h2>
+    <label>Choose a service</label>
+    <select id="service-select">
+      <option value="">-- Select Service --</option>
+      <option value="Network Setup|2000">Network Setup (5 Devices) - $2,000</option>
+      <option value="Web Development|3500">Web Development - $3,500</option>
+      <option value="Ticketing System|4000">Custom Ticketing System - $4,000</option>
+      <option value="IT Asset Management|1000">IT Asset Management Setup - $1,000</option>
+    </select>
+
+    <label>Quantity</label>
+    <input type="number" id="qty" min="1" value="1" />
+
+    <button type="button" onclick="addService()">Add Service</button>
+
+    <table id="quote-table">
+      <thead>
+        <tr><th>Service</th><th>Qty</th><th>Unit Price</th><th>Total</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <div class="total">Total: $<span id="grand-total">0</span></div>
+
+    <button type="submit">Submit Quote</button>
+  </form>
+
+  <script>
+    const tbody = document.querySelector("#quote-table tbody");
+    const totalSpan = document.getElementById("grand-total");
+    let total = 0;
+
+    function addService() {
+      const serviceInput = document.getElementById("service-select").value;
+      const qty = parseInt(document.getElementById("qty").value);
+      if (!serviceInput || qty <= 0) return;
+
+      const [serviceName, unitPriceStr] = serviceInput.split("|");
+      const unitPrice = parseFloat(unitPriceStr);
+      const lineTotal = unitPrice * qty;
+      total += lineTotal;
+
+      const row = document.createElement("tr");
+      row.innerHTML = `<td>${serviceName}</td><td>${qty}</td><td>$${unitPrice.toFixed(2)}</td><td>$${lineTotal.toFixed(2)}</td>`;
+      tbody.appendChild(row);
+
+      totalSpan.innerText = total.toFixed(2);
+
+      document.getElementById("service-select").selectedIndex = 0;
+      document.getElementById("qty").value = 1;
+    }
+
+    document.getElementById("quote-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      alert("Quote submitted! (You can link this to email or database.)");
+    });
+  </script>
+</body>
+</html>
