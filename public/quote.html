@@ -137,30 +137,68 @@
     <p>&copy; 2025 CONSTANTLY CODING LLC. All Rights Reserved.</p>
   </footer>
   <script>
-    const tbody = document.querySelector("#quote-table tbody");
-    const totalSpan = document.getElementById("grand-total");
-    let total = 0;
-    function addService() {
-      const serviceInput = document.getElementById("service-select").value;
-      const qty = parseInt(document.getElementById("qty").value);
-      const desc = document.getElementById("desc").value.trim();
-      if (!serviceInput || qty <= 0) return;
-      const [serviceName, unitPriceStr] = serviceInput.split("|");
-      const unitPrice = parseFloat(unitPriceStr);
-      const lineTotal = unitPrice * qty;
-      total += lineTotal;
-      const row = document.createElement("tr");
-      row.innerHTML = `<td>${serviceName}</td><td>${qty}</td><td>${desc || "N/A"}</td><td>$${unitPrice.toFixed(2)}</td><td>$${lineTotal.toFixed(2)}</td>`;
-      tbody.appendChild(row);
-      totalSpan.innerText = total.toFixed(2);
-      document.getElementById("service-select").selectedIndex = 0;
-      document.getElementById("qty").value = 1;
-      document.getElementById("desc").value = "";
+  const tbody = document.querySelector("#quote-table tbody");
+  const totalSpan = document.getElementById("grand-total");
+  let total = 0;
+  let quoteItems = [];
+
+  function addService() {
+    const serviceInput = document.getElementById("service-select").value;
+    const qty = parseInt(document.getElementById("qty").value);
+    const desc = document.getElementById("desc").value.trim();
+
+    if (!serviceInput || qty <= 0) return;
+
+    const [serviceName, unitPriceStr] = serviceInput.split("|");
+    const unitPrice = parseFloat(unitPriceStr);
+    const lineTotal = unitPrice * qty;
+    total += lineTotal;
+
+    quoteItems.push({ serviceName, qty, desc, unitPrice, lineTotal });
+
+    const row = document.createElement("tr");
+    row.innerHTML = `<td>${serviceName}</td><td>${qty}</td><td>${desc || "N/A"}</td><td>$${unitPrice.toFixed(2)}</td><td>$${lineTotal.toFixed(2)}</td>`;
+    tbody.appendChild(row);
+
+    totalSpan.innerText = total.toFixed(2);
+
+    document.getElementById("service-select").selectedIndex = 0;
+    document.getElementById("qty").value = 1;
+    document.getElementById("desc").value = "";
+  }
+
+  document.getElementById("quote-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const name = e.target.name.value;
+    const email = e.target.email.value;
+    const phone = e.target.phone.value;
+
+    if (quoteItems.length === 0) {
+      alert("Please add at least one service to the quote.");
+      return;
     }
-    document.getElementById("quote-form").addEventListener("submit", (e) => {
-      e.preventDefault();
-      alert("Quote submitted! (You can link this to email or database.)");
-    });
-  </script>
+
+    const quoteSummary = {
+      name,
+      email,
+      phone,
+      items: quoteItems,
+      grandTotal: total.toFixed(2),
+    };
+
+    console.log("Quote submitted:", quoteSummary);
+
+    alert(`Thanks, ${name}! Your quote was submitted.\n\nWe'll contact you soon.`);
+
+    // Optional: Clear form
+    e.target.reset();
+    tbody.innerHTML = "";
+    total = 0;
+    quoteItems = [];
+    totalSpan.innerText = "0";
+  });
+</script>
+
 </body>
 </html>
