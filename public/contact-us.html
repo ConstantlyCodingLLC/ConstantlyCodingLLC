@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Quote Generator | CONSTANTLY CODING LLC</title>
+  <title>Contact Us | CONSTANT CODING LLC</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
       font-family: 'Roboto', sans-serif;
       color: white;
@@ -15,13 +19,41 @@
       overflow-x: hidden;
       line-height: 1.6;
     }
+
+    .background-logo {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+      opacity: 0.1;
+      pointer-events: none;
+      max-width: 100%;
+      width: 80%;
+      height: auto;
+      animation: fadeInBackground 10s infinite;
+    }
+
+    @keyframes fadeInBackground {
+      0% { opacity: 0.05; }
+      50% { opacity: 0.15; }
+      100% { opacity: 0.05; }
+    }
+
+    @keyframes logoGlow {
+      0% { box-shadow: 0 0 15px #38bdf8, 0 0 30px #00bfff; }
+      100% { box-shadow: 0 0 25px #38bdf8, 0 0 50px #00bfff; }
+    }
+
     header nav {
       display: flex;
       justify-content: center;
       gap: 20px;
       padding: 20px;
       background-color: #0f172a;
+      animation: fadeIn 2s ease-in;
     }
+
     header nav a {
       font-family: 'Orbitron', sans-serif;
       color: #38bdf8;
@@ -29,28 +61,39 @@
       font-weight: 600;
       transition: color 0.3s;
     }
+
     header nav a:hover { color: #ffffff; }
-    section#quote {
-      max-width: 800px;
+
+    #contact {
+      max-width: 600px;
       margin: 50px auto;
       padding: 30px;
       background-color: rgba(15, 23, 42, 0.8);
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(56, 189, 248, 0.3);
+      animation: fadeIn 2s ease-in;
       text-align: center;
     }
-    section#quote h2 {
+
+    #contact h2 {
       font-family: 'Orbitron', sans-serif;
       color: #38bdf8;
       font-size: 2.5rem;
       margin-bottom: 20px;
     }
-    section#quote form {
+
+    #contact p {
+      color: #e2e8f0;
+      margin-bottom: 30px;
+    }
+
+    form {
       display: flex;
       flex-direction: column;
       gap: 15px;
     }
-    input, select {
+
+    input, textarea {
       padding: 12px;
       border: none;
       border-radius: 8px;
@@ -58,17 +101,11 @@
       background-color: #1e293b;
       color: white;
     }
-    table {
-      width: 100%;
-      margin-top: 20px;
-      background: #111827;
-      border-collapse: collapse;
-      text-align: left;
+
+    input::placeholder, textarea::placeholder {
+      color: #94a3b8;
     }
-    th, td {
-      padding: 10px;
-      border-bottom: 1px solid #334155;
-    }
+
     button {
       background-color: #38bdf8;
       color: #0b1120;
@@ -78,18 +115,42 @@
       border: none;
       border-radius: 8px;
       cursor: pointer;
+      animation: logoGlow 2s infinite alternate;
       transition: background-color 0.3s;
     }
+
     button:hover {
       background-color: #0ea5e9;
     }
-    .total {
-      font-size: 1.2rem;
-      font-weight: bold;
-      text-align: right;
-      margin-top: 15px;
+
+    .success-message {
+      display: none;
+      font-size: 1.1rem;
       color: #e2e8f0;
+      background-color: #1e293b;
+      padding: 20px;
+      border-radius: 10px;
+      animation: fadeIn 1.5s ease-in;
     }
+
+    .cta-button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 24px;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: bold;
+      color: white;
+      background-color: #38bdf8;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+      animation: logoGlow 2s infinite alternate;
+    }
+
+    .cta-button:hover {
+      background-color: #0ea5e9;
+    }
+
     footer {
       background-color: #1e2a47;
       color: #e2e8f0;
@@ -98,105 +159,87 @@
       font-weight: 600;
       margin-top: 50px;
     }
+
+    @media (max-width: 768px) {
+      #contact h2 { font-size: 2rem; }
+      form input, form textarea, form button { font-size: 1rem; }
+      .cta-button { font-size: 1rem; padding: 10px 20px; }
+    }
   </style>
 </head>
+
 <body>
+
+  <img src="your-logo.png" alt="Background Logo" class="background-logo" />
+
   <header>
     <nav>
       <a href="home.html">Home</a>
-      <a href="contact-us.html">Contact</a>
-    </nav>
+     </nav>
   </header>
-  <section id="quote">
-    <h2>Quote Generator</h2>
-    <form id="quote-form">
-      <input type="text" name="user_name" placeholder="Full Name" required />
-      <input type="email" name="user_email" placeholder="Email Address" required />
-      <input type="tel" name="user_phone" placeholder="Phone Number" />
-      <input type="text" id="desc" placeholder="Description of what you want (e.g., 5 office desktops in OKC)" />
-      <select id="service-select">
-        <option value="">-- Select Service --</option>
-        <option value="Network Setup|2000">Network Setup (5 Devices) - $2,000</option>
-        <option value="Web Development|3500">Web Development - $3,500</option>
-        <option value="Ticketing System|4000">Custom Ticketing System - $4,000</option>
-        <option value="IT Asset Management|1000">IT Asset Management Setup - $1,000</option>
-      </select>
-      <input type="number" id="qty" min="1" value="1" placeholder="Quantity" />
-      <input type="hidden" name="quote_data" id="quote_data" />
-      <button type="button" onclick="addService()">Add Service</button>
-      <table id="quote-table">
-        <thead>
-          <tr><th>Service</th><th>Qty</th><th>Details</th><th>Unit Price</th><th>Total</th></tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-      <div class="total">Total: $<span id="grand-total">0</span></div>
-      <button type="submit">Submit Quote</button>
-    </form>
-  </section>
-  <footer>
-    <p>&copy; 2025 CONSTANTLY CODING LLC. All Rights Reserved.</p>
-  </footer>
 
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-  <script>
-    emailjs.init("E9OsYJGehSyOtP6bv");
+  <!-- Contact Form -->
+<section id="contact">
+  <h2>Contact Us</h2>
+  <p>Let’s talk. Whether it’s a quick question or a full project, we’re here to help.</p>
 
-    const tbody = document.querySelector("#quote-table tbody");
-    const totalSpan = document.getElementById("grand-total");
-    const quoteDataInput = document.getElementById("quote_data");
-    let total = 0;
+  <form id="contact-form">
+    <input type="text" name="from_name" placeholder="Your Name" required />
+    <input type="email" name="reply_to" placeholder="Your Email" required />
+    <textarea name="message" rows="5" placeholder="Your Message..." required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
 
-    function addService() {
-      const serviceInput = document.getElementById("service-select").value;
-      const qty = parseInt(document.getElementById("qty").value);
-      const desc = document.getElementById("desc").value.trim();
-      if (!serviceInput || qty <= 0) return;
+  <div id="success-message" class="success-message">
+    Thank you! Your message has been successfully sent. We'll get back to you soon.
+    <br /><br />
+    <a href="home.html" class="cta-button">GO TO HOME PAGE</a>
+  </div>
+</section>
 
-      const [serviceName, unitPriceStr] = serviceInput.split("|");
-      const unitPrice = parseFloat(unitPriceStr);
-      const lineTotal = unitPrice * qty;
-      total += lineTotal;
+<!-- EmailJS -->
+<!-- REPLACE your current <script> section with this one -->
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+  window.onload = function () {
+    emailjs.init("E9OsYJGehSyOtP6bv"); // Your EmailJS public key
 
-      const row = document.createElement("tr");
-      row.innerHTML = `<td>${serviceName}</td><td>${qty}</td><td>${desc || "N/A"}</td><td>$${unitPrice.toFixed(2)}</td><td>$${lineTotal.toFixed(2)}</td>`;
-      tbody.appendChild(row);
+    const form = document.getElementById("contact-form");
+    const successMessage = document.getElementById("success-message");
 
-      totalSpan.innerText = total.toFixed(2);
-
-      updateQuoteData();
-      document.getElementById("service-select").selectedIndex = 0;
-      document.getElementById("qty").value = 1;
-      document.getElementById("desc").value = "";
-    }
-
-    function updateQuoteData() {
-      let data = "";
-      document.querySelectorAll("#quote-table tbody tr").forEach(row => {
-        const cells = row.querySelectorAll("td");
-        data += `Service: ${cells[0].innerText}, Qty: ${cells[1].innerText}, Details: ${cells[2].innerText}, Unit Price: ${cells[3].innerText}, Total: ${cells[4].innerText}\n`;
-      });
-      data += `\nGrand Total: $${total.toFixed(2)}`;
-      quoteDataInput.value = data;
-    }
-
-    document.getElementById("quote-form").addEventListener("submit", function (e) {
+    form.addEventListener("submit", function (e) {
       e.preventDefault();
 
-      updateQuoteData();
+      // Step 1: Send message to YOU
+      emailjs.sendForm("service_eh25yzg", "template_r8c8xqe", form)
+        .then(function () {
+          // Step 2: Send auto-reply to USER
+          const formData = new FormData(form);
+          const userData = {
+            to_name: formData.get("from_name"),
+            to_email: formData.get("reply_to")
+          };
 
-      emailjs.sendForm("service_eh25yzg", "template_r8c8xqe", this)
-        .then(() => {
-          alert("Quote submitted successfully!");
-          this.reset();
-          tbody.innerHTML = "";
-          total = 0;
-          totalSpan.innerText = "0";
-        }, (error) => {
-          alert("Failed to send quote. Please try again.");
-          console.error(error);
+          return emailjs.send("service_eh25yzg", "template_auto_reply", userData);
+        })
+        .then(function () {
+          form.reset();
+          form.style.display = "none";
+          successMessage.style.display = "block";
+        })
+        .catch(function (error) {
+          console.error("FAILED...", error);
+          alert("Oops! Something went wrong: " + error.text);
         });
     });
-  </script>
+  };
+</script>
+
+
+  <footer>
+    <p>&copy; 2025 CONSTANT CODING LLC. All Rights Reserved.</p>
+  </footer>
+
 </body>
+
 </html>
