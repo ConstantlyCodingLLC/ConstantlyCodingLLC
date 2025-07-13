@@ -122,6 +122,7 @@
         <option value="IT Asset Management|1000">IT Asset Management Setup - $1,000</option>
       </select>
       <input type="number" id="qty" min="1" value="1" placeholder="Quantity" />
+      <input type="hidden" name="quote_data" id="quote-data" />
       <button type="button" onclick="addService()">Add Service</button>
       <table id="quote-table">
         <thead>
@@ -135,26 +136,64 @@
   </section>
   <footer>
     <p>&copy; 2025 CONSTANTLY CODING LLC. All Rights Reserved.</p>
-  </footer
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-<script>
-  emailjs.init("E9OsYJGehSyOtP6bv");
+  </footer>
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    let total = 0;
+    emailjs.init("E9OsYJGehSyOtP6bv");
 
-  document.getElementById("quote-form").addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    emailjs.sendForm("service_eh25yzg", "template_r8c8xqe", this)
-      .then(() => {
-        alert("Quote submitted successfully!");
-        this.reset();
-        document.querySelector("#quote-table tbody").innerHTML = "";
-        document.getElementById("grand-total").textContent = "0";
-        total = 0;
-      }, (error) => {
-        alert("Failed to send quote. Please try again.");
-        console.log(error);
+    function updateQuoteDataField() {
+      const rows = Array.from(document.querySelectorAll("#quote-table tbody tr")).map(row => {
+        const cells = row.querySelectorAll("td");
+        return {
+          service: cells[0].textContent,
+          quantity: cells[1].textContent,
+          details: cells[2].textContent,
+          unitPrice: cells[3].textContent,
+          total: cells[4].textContent
+        };
       });
-  });
-</script>
+      document.getElementById("quote-data").value = JSON.stringify(rows, null, 2);
+    }
+
+    function addService() {
+      const serviceInput = document.getElementById("service-select").value;
+      const qty = parseInt(document.getElementById("qty").value);
+      const desc = document.getElementById("desc").value.trim();
+      if (!serviceInput || qty <= 0) return;
+
+      const [serviceName, unitPriceStr] = serviceInput.split("|");
+      const unitPrice = parseFloat(unitPriceStr);
+      const lineTotal = unitPrice * qty;
+      total += lineTotal;
+
+      const row = document.createElement("tr");
+      row.innerHTML = `<td>${serviceName}</td><td>${qty}</td><td>${desc || "N/A"}</td><td>$${unitPrice.toFixed(2)}</td><td>$${lineTotal.toFixed(2)}</td>`;
+      document.querySelector("#quote-table tbody").appendChild(row);
+
+      document.getElementById("grand-total").textContent = total.toFixed(2);
+      document.getElementById("service-select").selectedIndex = 0;
+      document.getElementById("qty").value = 1;
+      document.getElementById("desc").value = "";
+
+      updateQuoteDataField();
+    }
+
+    document.getElementById("quote-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      emailjs.sendForm("service_eh25yzg", "template_r8c8xqe", this)
+        .then(() => {
+          alert("Quote submitted successfully!");
+          this.reset();
+          document.querySelector("#quote-table tbody").innerHTML = "";
+          document.getElementById("grand-total").textContent = "0";
+          total = 0;
+        }, (error) => {
+          alert("Failed to send quote. Please try again.");
+          console.error(error);
+        });
+    });
+  </script>
 </body>
 </html>
