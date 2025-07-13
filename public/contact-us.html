@@ -6,11 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact Us | CONSTANT CODING LLC</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
 
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
       font-family: 'Roboto', sans-serif;
@@ -35,14 +39,27 @@
     }
 
     @keyframes fadeInBackground {
-      0% { opacity: 0.05; }
-      50% { opacity: 0.15; }
-      100% { opacity: 0.05; }
+      0% {
+        opacity: 0.05;
+      }
+
+      50% {
+        opacity: 0.15;
+      }
+
+      100% {
+        opacity: 0.05;
+      }
     }
 
     @keyframes logoGlow {
-      0% { box-shadow: 0 0 15px #38bdf8, 0 0 30px #00bfff; }
-      100% { box-shadow: 0 0 25px #38bdf8, 0 0 50px #00bfff; }
+      0% {
+        box-shadow: 0 0 15px #38bdf8, 0 0 30px #00bfff;
+      }
+
+      100% {
+        box-shadow: 0 0 25px #38bdf8, 0 0 50px #00bfff;
+      }
     }
 
     header nav {
@@ -62,7 +79,9 @@
       transition: color 0.3s;
     }
 
-    header nav a:hover { color: #ffffff; }
+    header nav a:hover {
+      color: #ffffff;
+    }
 
     #contact {
       max-width: 600px;
@@ -93,7 +112,8 @@
       gap: 15px;
     }
 
-    input, textarea {
+    input,
+    textarea {
       padding: 12px;
       border: none;
       border-radius: 8px;
@@ -102,7 +122,8 @@
       color: white;
     }
 
-    input::placeholder, textarea::placeholder {
+    input::placeholder,
+    textarea::placeholder {
       color: #94a3b8;
     }
 
@@ -161,9 +182,20 @@
     }
 
     @media (max-width: 768px) {
-      #contact h2 { font-size: 2rem; }
-      form input, form textarea, form button { font-size: 1rem; }
-      .cta-button { font-size: 1rem; padding: 10px 20px; }
+      #contact h2 {
+        font-size: 2rem;
+      }
+
+      form input,
+      form textarea,
+      form button {
+        font-size: 1rem;
+      }
+
+      .cta-button {
+        font-size: 1rem;
+        padding: 10px 20px;
+      }
     }
   </style>
 </head>
@@ -175,66 +207,65 @@
   <header>
     <nav>
       <a href="home.html">Home</a>
-     </nav>
+    </nav>
   </header>
 
   <!-- Contact Form -->
-<section id="contact">
-  <h2>Contact Us</h2>
-  <p>Let’s talk. Whether it’s a quick question or a full project, we’re here to help.</p>
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>Let’s talk. Whether it’s a quick question or a full project, we’re here to help.</p>
 
-  <form id="contact-form">
-    <input type="text" name="from_name" placeholder="Your Name" required />
-    <input type="email" name="reply_to" placeholder="Your Email" required />
-    <textarea name="message" rows="5" placeholder="Your Message..." required></textarea>
-    <button type="submit">Send Message</button>
-  </form>
+    <form id="contact-form">
+      <input type="text" name="from_name" placeholder="Your Name" required />
+      <input type="email" name="reply_to" placeholder="Your Email" required />
+      <textarea name="message" rows="5" placeholder="Your Message..." required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
 
-  <div id="success-message" class="success-message">
-    Thank you! Your message has been successfully sent. We'll get back to you soon.
-    <br /><br />
-    <a href="home.html" class="cta-button">GO TO HOME PAGE</a>
-  </div>
-</section>
+    <div id="success-message" class="success-message">
+      Thank you! Your message has been successfully sent. We'll get back to you soon.
+      <br /><br />
+      <a href="home.html" class="cta-button">GO TO HOME PAGE</a>
+    </div>
+  </section>
 
-<!-- EmailJS -->
-<!-- REPLACE your current <script> section with this one -->
-<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-<script>
-  window.onload = function () {
-    emailjs.init("E9OsYJGehSyOtP6bv"); // Your EmailJS public key
+  <!-- EmailJS -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    window.onload = function () {
+      emailjs.init("E9OsYJGehSyOtP6bv"); // Your EmailJS public key
 
-    const form = document.getElementById("contact-form");
-    const successMessage = document.getElementById("success-message");
+      const form = document.getElementById("contact-form");
+      const successMessage = document.getElementById("success-message");
 
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
 
-      // Step 1: Send message to YOU
-      emailjs.sendForm("service_eh25yzg", "template_r8c8xqe", form)
-        .then(function () {
-          // Step 2: Send auto-reply to USER
-          const formData = new FormData(form);
-          const userData = {
-            to_name: formData.get("from_name"),
-            to_email: formData.get("reply_to")
-          };
+        emailjs.sendForm("service_eh25yzg", "template_r8c8xqe", form)
+          .then(function () {
+            /*
+            // COMMENTED OUT auto-reply to avoid 404 error:
+            const formData = new FormData(form);
+            const userData = {
+              to_name: formData.get("from_name"),
+              to_email: formData.get("reply_to")
+            };
 
-          return emailjs.send("service_eh25yzg", "template_auto_reply", userData);
-        })
-        .then(function () {
-          form.reset();
-          form.style.display = "none";
-          successMessage.style.display = "block";
-        })
-        .catch(function (error) {
-          console.error("FAILED...", error);
-          alert("Oops! Something went wrong: " + error.text);
-        });
-    });
-  };
-</script>
-
+            return emailjs.send("service_eh25yzg", "template_auto_reply", userData);
+            */
+          })
+          .then(function () {
+            form.reset();
+            form.style.display = "none";
+            successMessage.style.display = "block";
+          })
+          .catch(function (error) {
+            console.error("FAILED...", error);
+            alert("Oops! Something went wrong: " + error.text);
+          });
+      });
+    };
+  </script>
 
   <footer>
     <p>&copy; 2025 CONSTANT CODING LLC. All Rights Reserved.</p>
