@@ -107,7 +107,6 @@
       <a href="contact-us.html">Contact</a>
     </nav>
   </header>
-
   <section id="quote">
     <h2>Quote Generator</h2>
     <form id="quote-form">
@@ -115,6 +114,9 @@
       <input type="email" name="email" placeholder="Email Address" required />
       <input type="tel" name="phone" placeholder="Phone Number" />
       <input type="text" id="desc" name="desc" placeholder="Description of what you want (e.g., 5 office desktops in OKC)" />
+      
+      <input type="hidden" name="quote_data" id="quote_data" />
+
       <select id="service-select">
         <option value="">-- Select Service --</option>
         <option value="Network Setup|2000">Network Setup (5 Devices) - $2,000</option>
@@ -123,29 +125,26 @@
         <option value="IT Asset Management|1000">IT Asset Management Setup - $1,000</option>
       </select>
       <input type="number" id="qty" min="1" value="1" placeholder="Quantity" />
-      
-      <!-- Hidden input to collect table data -->
-      <input type="hidden" name="quote_data" id="quote_data" />
-
       <button type="button" onclick="addService()">Add Service</button>
+      
       <table id="quote-table">
         <thead>
           <tr><th>Service</th><th>Qty</th><th>Details</th><th>Unit Price</th><th>Total</th></tr>
         </thead>
         <tbody></tbody>
       </table>
+
       <div class="total">Total: $<span id="grand-total">0</span></div>
       <button type="submit">Submit Quote</button>
     </form>
   </section>
-
   <footer>
     <p>&copy; 2025 CONSTANTLY CODING LLC. All Rights Reserved.</p>
   </footer>
 
   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <script>
-    emailjs.init("E9OsYJGehSyOtP6bv"); // Replace with your actual EmailJS Public Key
+    emailjs.init("E9OsYJGehSyOtP6bv"); // Your public key
 
     const tbody = document.querySelector("#quote-table tbody");
     const totalSpan = document.getElementById("grand-total");
@@ -168,16 +167,27 @@
       tbody.appendChild(row);
 
       totalSpan.innerText = total.toFixed(2);
+      updateQuoteData();
+
       document.getElementById("service-select").selectedIndex = 0;
       document.getElementById("qty").value = 1;
       document.getElementById("desc").value = "";
     }
 
+    function updateQuoteData() {
+      let text = "";
+      const rows = document.querySelectorAll("#quote-table tbody tr");
+      rows.forEach(row => {
+        const cols = row.querySelectorAll("td");
+        const line = `Service: ${cols[0].innerText}, Qty: ${cols[1].innerText}, Details: ${cols[2].innerText}, Price: ${cols[3].innerText}, Total: ${cols[4].innerText}`;
+        text += line + "\n";
+      });
+      quoteDataInput.value = text;
+    }
+
     document.getElementById("quote-form").addEventListener("submit", function (e) {
       e.preventDefault();
-
-      // Set quote_data value as the full HTML of the table body
-      quoteDataInput.value = tbody.innerHTML;
+      updateQuoteData(); // make sure latest data is sent
 
       emailjs.sendForm("service_eh25yzg", "template_r8c8xqe", this)
         .then(() => {
@@ -186,8 +196,9 @@
           tbody.innerHTML = "";
           total = 0;
           totalSpan.innerText = "0";
+          quoteDataInput.value = "";
         }, (error) => {
-          alert("Failed to send quote. Please try again.");
+          alert("Failed to send quote. Please check EmailJS settings.");
           console.log(error);
         });
     });
