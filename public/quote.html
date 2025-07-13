@@ -135,32 +135,26 @@
   </section>
   <footer>
     <p>&copy; 2025 CONSTANTLY CODING LLC. All Rights Reserved.</p>
-  </footer>
-  <script>
-    const tbody = document.querySelector("#quote-table tbody");
-    const totalSpan = document.getElementById("grand-total");
-    let total = 0;
-    function addService() {
-      const serviceInput = document.getElementById("service-select").value;
-      const qty = parseInt(document.getElementById("qty").value);
-      const desc = document.getElementById("desc").value.trim();
-      if (!serviceInput || qty <= 0) return;
-      const [serviceName, unitPriceStr] = serviceInput.split("|");
-      const unitPrice = parseFloat(unitPriceStr);
-      const lineTotal = unitPrice * qty;
-      total += lineTotal;
-      const row = document.createElement("tr");
-      row.innerHTML = `<td>${serviceName}</td><td>${qty}</td><td>${desc || "N/A"}</td><td>$${unitPrice.toFixed(2)}</td><td>$${lineTotal.toFixed(2)}</td>`;
-      tbody.appendChild(row);
-      totalSpan.innerText = total.toFixed(2);
-      document.getElementById("service-select").selectedIndex = 0;
-      document.getElementById("qty").value = 1;
-      document.getElementById("desc").value = "";
-    }
-    document.getElementById("quote-form").addEventListener("submit", (e) => {
-      e.preventDefault();
-      alert("Quote submitted! (You can link this to email or database.)");
-    });
-  </script>
+  </footer
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+  emailjs.init("E9OsYJGehSyOtP6bv");
+
+  document.getElementById("quote-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    emailjs.sendForm("service_eh25yzg", "template_r8c8xqe", this)
+      .then(() => {
+        alert("Quote submitted successfully!");
+        this.reset();
+        document.querySelector("#quote-table tbody").innerHTML = "";
+        document.getElementById("grand-total").textContent = "0";
+        total = 0;
+      }, (error) => {
+        alert("Failed to send quote. Please try again.");
+        console.log(error);
+      });
+  });
+</script>
 </body>
 </html>
