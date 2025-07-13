@@ -122,6 +122,7 @@
         <option value="IT Asset Management|1000">IT Asset Management Setup - $1,000</option>
       </select>
       <input type="number" id="qty" min="1" value="1" placeholder="Quantity" />
+      <input type="hidden" name="quote_data" id="quote-data" />
       <button type="button" onclick="addService()">Add Service</button>
       <table id="quote-table">
         <thead>
@@ -139,7 +140,7 @@
 
   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <script>
-    emailjs.init("E9OsYJGehSyOtP6bv"); // Replace with your actual public key
+    emailjs.init("E9OsYJGehSyOtP6bv");
 
     const tbody = document.querySelector("#quote-table tbody");
     const totalSpan = document.getElementById("grand-total");
@@ -161,15 +162,23 @@
       tbody.appendChild(row);
 
       totalSpan.innerText = total.toFixed(2);
+      updateQuoteDataField();
 
       document.getElementById("service-select").selectedIndex = 0;
       document.getElementById("qty").value = 1;
       document.getElementById("desc").value = "";
     }
 
+    function updateQuoteDataField() {
+      const rows = Array.from(document.querySelectorAll("#quote-table tbody tr")).map(row => {
+        const cells = row.querySelectorAll("td");
+        return `Service: ${cells[0].textContent}, Qty: ${cells[1].textContent}, Details: ${cells[2].textContent}, Unit Price: ${cells[3].textContent}, Total: ${cells[4].textContent}`;
+      });
+      document.getElementById("quote-data").value = rows.join("\n");
+    }
+
     document.getElementById("quote-form").addEventListener("submit", function (e) {
       e.preventDefault();
-
       emailjs.sendForm("service_eh25yzg", "template_r8c8xqe", this)
         .then(() => {
           alert("Quote submitted successfully!");
@@ -177,6 +186,7 @@
           tbody.innerHTML = "";
           total = 0;
           totalSpan.innerText = "0";
+          document.getElementById("quote-data").value = "";
         }, (error) => {
           alert("Failed to send quote. Please try again.");
           console.log(error);
