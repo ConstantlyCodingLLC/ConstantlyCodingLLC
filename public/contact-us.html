@@ -1,245 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact Us | CONSTANT CODING LLC</title>
-
+  <title>Quote Request | CONSTANT CODING LLC</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
       font-family: 'Roboto', sans-serif;
-      color: white;
       background-color: #0b1120;
-      overflow-x: hidden;
-      line-height: 1.6;
-    }
-
-    .background-logo {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: -1;
-      opacity: 0.1;
-      pointer-events: none;
-      max-width: 100%;
-      width: 80%;
-      height: auto;
-      animation: fadeInBackground 10s infinite;
-    }
-
-    @keyframes fadeInBackground {
-      0% { opacity: 0.05; }
-      50% { opacity: 0.15; }
-      100% { opacity: 0.05; }
-    }
-
-    @keyframes logoGlow {
-      0% { box-shadow: 0 0 15px #38bdf8, 0 0 30px #00bfff; }
-      100% { box-shadow: 0 0 25px #38bdf8, 0 0 50px #00bfff; }
-    }
-
-    header nav {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
+      color: #e2e8f0;
       padding: 20px;
-      background-color: #0f172a;
-      animation: fadeIn 2s ease-in;
+      max-width: 900px;
+      margin: auto;
     }
 
-    header nav a {
-      font-family: 'Orbitron', sans-serif;
+    h1, h2 {
       color: #38bdf8;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s;
-    }
-
-    header nav a:hover { color: #ffffff; }
-
-    #contact {
-      max-width: 600px;
-      margin: 50px auto;
-      padding: 30px;
-      background-color: rgba(15, 23, 42, 0.8);
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(56, 189, 248, 0.3);
-      animation: fadeIn 2s ease-in;
+      font-family: 'Orbitron', sans-serif;
       text-align: center;
     }
 
-    #contact h2 {
-      font-family: 'Orbitron', sans-serif;
-      color: #38bdf8;
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-    }
-
-    #contact p {
-      color: #e2e8f0;
+    .section {
+      background: #1e293b;
+      padding: 20px;
       margin-bottom: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
     }
 
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
+    label {
+      display: block;
+      margin: 10px 0;
     }
 
-    input, textarea {
+    input[type="checkbox"], input[type="text"], input[type="email"], textarea {
+      margin-top: 5px;
+    }
+
+    input[type="text"], input[type="email"], textarea {
+      width: 100%;
       padding: 12px;
+      background: #273549;
       border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      background-color: #1e293b;
+      border-radius: 6px;
       color: white;
     }
 
-    input::placeholder, textarea::placeholder {
-      color: #94a3b8;
+    .total {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #22d3ee;
+      margin-top: 10px;
     }
 
-    button {
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
       background-color: #38bdf8;
-      color: #0b1120;
+      color: #0f172a;
       font-weight: bold;
-      font-size: 1.1rem;
-      padding: 12px;
       border: none;
       border-radius: 8px;
+      font-size: 1rem;
       cursor: pointer;
-      animation: logoGlow 2s infinite alternate;
-      transition: background-color 0.3s;
+      margin-top: 20px;
     }
 
-    button:hover {
+    .submit-btn:hover {
       background-color: #0ea5e9;
     }
 
     .success-message {
       display: none;
-      font-size: 1.1rem;
-      color: #e2e8f0;
       background-color: #1e293b;
       padding: 20px;
       border-radius: 10px;
-      animation: fadeIn 1.5s ease-in;
+      text-align: center;
+      margin-top: 20px;
     }
 
     .cta-button {
       display: inline-block;
-      margin-top: 20px;
-      padding: 12px 24px;
-      font-family: 'Orbitron', sans-serif;
+      margin-top: 10px;
+      padding: 12px 20px;
+      background: #38bdf8;
+      color: #0b1120;
       font-weight: bold;
-      color: white;
-      background-color: #38bdf8;
-      border-radius: 10px;
+      border-radius: 8px;
       text-decoration: none;
-      transition: background-color 0.3s;
-      animation: logoGlow 2s infinite alternate;
-    }
-
-    .cta-button:hover {
-      background-color: #0ea5e9;
     }
 
     footer {
-      background-color: #1e2a47;
-      color: #e2e8f0;
       text-align: center;
-      padding: 20px;
-      font-weight: 600;
-      margin-top: 50px;
+      color: #94a3b8;
+      margin-top: 40px;
     }
 
-    @media (max-width: 768px) {
-      #contact h2 { font-size: 2rem; }
-      form input, form textarea, form button { font-size: 1rem; }
-      .cta-button { font-size: 1rem; padding: 10px 20px; }
+    @media (max-width: 600px) {
+      h1 { font-size: 1.8rem; }
+      h2 { font-size: 1.4rem; }
     }
   </style>
 </head>
 
 <body>
 
-  <img src="your-logo.png" alt="Background Logo" class="background-logo" />
+  <h1>Request a Custom Quote</h1>
 
-  <header>
-    <nav>
-      <a href="home.html">Home</a>
-     </nav>
-  </header>
+  <form id="quoteForm">
+    <div class="section">
+      <h2>Select Services</h2>
 
-  <!-- Contact Form -->
-<section id="contact">
-  <h2>Contact Us</h2>
-  <p>Let’s talk. Whether it’s a quick question or a full project, we’re here to help.</p>
+      <label><input type="checkbox" name="services" value="300"> Starter Website ($300)</label>
+      <label><input type="checkbox" name="services" value="750"> 5-Page Website ($750)</label>
+      <label><input type="checkbox" name="services" value="1200"> Web/App Store ($1200)</label>
+      <label><input type="checkbox" name="services" value="250"> Home Office Setup ($250)</label>
+      <label><input type="checkbox" name="services" value="600"> Small Office Network ($600)</label>
+      <label><input type="checkbox" name="services" value="1000"> Secure Office Network ($1000)</label>
+      <label><input type="checkbox" name="services" value="400"> Basic Cabling Drop ($400)</label>
+      <label><input type="checkbox" name="services" value="950"> Office Wiring ($950)</label>
+      <label><input type="checkbox" name="services" value="1500"> Full Cabling Package ($1500)</label>
+      <label><input type="checkbox" name="services" value="300"> Basic Ticketing System ($300)</label>
+      <label><input type="checkbox" name="services" value="600"> Internal Ticket Suite ($600)</label>
+      <label><input type="checkbox" name="services" value="1000"> Advanced Ticketing + Portal ($1000)</label>
+      <label><input type="checkbox" name="services" value="300"> Inventory Tracker Lite ($300)</label>
+      <label><input type="checkbox" name="services" value="750"> Asset Suite ($750)</label>
+      <label><input type="checkbox" name="services" value="1200"> Smart Management Dashboard ($1200)</label>
 
-  <form id="contact-form">
-    <input type="text" name="from_name" placeholder="Your Name" required />
-    <input type="email" name="reply_to" placeholder="Your Email" required />
-    <textarea name="message" rows="5" placeholder="Your Message..." required></textarea>
-    <button type="submit">Send Message</button>
+      <div class="total">Total: $<span id="totalPrice">0</span></div>
+    </div>
+
+    <div class="section">
+      <h2>Your Information</h2>
+      <label>Full Name:
+        <input type="text" name="from_name" required />
+      </label>
+      <label>Email:
+        <input type="email" name="reply_to" required />
+      </label>
+      <label>Business Name (optional):
+        <input type="text" name="business_name" />
+      </label>
+      <label>Additional Message:
+        <textarea name="message" placeholder="What do you need most?"></textarea>
+      </label>
+    </div>
+
+    <input type="submit" value="Submit Quote Request" class="submit-btn" />
   </form>
 
   <div id="success-message" class="success-message">
-    Thank you! Your message has been successfully sent. We'll get back to you soon.
-    <br /><br />
-    <a href="home.html" class="cta-button">GO TO HOME PAGE</a>
+    <p>✅ Your quote request has been sent successfully! We’ll be in touch shortly.</p>
+    <a href="home.html" class="cta-button">Return to Homepage</a>
   </div>
-</section>
 
-<!-- EmailJS -->
-<!-- REPLACE your current <script> section with this one -->
-<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-<script>
-  window.onload = function () {
-    emailjs.init("E9OsYJGehSyOtP6bv"); // Your EmailJS public key
+  <footer>&copy; 2025 CONSTANT CODING LLC. All Rights Reserved.</footer>
 
-    const form = document.getElementById("contact-form");
+  <!-- EmailJS Integration -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    emailjs.init("E9OsYJGehSyOtP6bv"); // Your public key
+
+    const form = document.getElementById("quoteForm");
     const successMessage = document.getElementById("success-message");
+    const totalDisplay = document.getElementById("totalPrice");
+
+    // Update Total Price
+    const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+    function updateTotal() {
+      let total = 0;
+      checkboxes.forEach(box => {
+        if (box.checked) total += parseFloat(box.value);
+      });
+      totalDisplay.textContent = total;
+    }
+    checkboxes.forEach(box => box.addEventListener("change", updateTotal));
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
+      updateTotal();
 
-      // Step 1: Send message to YOU
+      // Send quote email to business
       emailjs.sendForm("service_eh25yzg", "template_r8c8xqe", form)
-        .then(function () {
-          // Step 2: Send auto-reply to USER
+        .then(() => {
+          // Send auto-reply to customer
           const formData = new FormData(form);
-          const userData = {
+          const replyData = {
             to_name: formData.get("from_name"),
             to_email: formData.get("reply_to")
           };
 
-          return emailjs.send("service_eh25yzg", "template_auto_reply", userData);
+          return emailjs.send("service_eh25yzg", "template_auto_reply", replyData);
         })
-        .then(function () {
+        .then(() => {
           form.reset();
           form.style.display = "none";
           successMessage.style.display = "block";
+          totalDisplay.textContent = "0";
         })
-        .catch(function (error) {
-          console.error("FAILED...", error);
-          alert("Oops! Something went wrong: " + error.text);
+        .catch(err => {
+          console.error("Submission Failed:", err);
+          alert("Error submitting form. Try again.");
         });
     });
-  };
-</script>
-
-
-  <footer>
-    <p>&copy; 2025 CONSTANT CODING LLC. All Rights Reserved.</p>
-  </footer>
-
+  </script>
 </body>
-
 </html>
