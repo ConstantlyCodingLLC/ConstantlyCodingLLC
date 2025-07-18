@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>App/Website Build Intake | CONSTANTLY CODING LLC</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #0b1120;
+      color: white;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      text-align: center;
+      color: #38bdf8;
+      margin-bottom: 30px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      background: #1e293b;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input, textarea, select {
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background: #0f172a;
+      color: white;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button {
+      background-color: #38bdf8;
+      color: #0b1120;
+      padding: 12px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0ea5e9;
+    }
+
+    .success-message {
+      text-align: center;
+      background: #1e293b;
+      color: #38bdf8;
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    @media (max-width: 600px) {
+      form {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <h1>App/Website Build Intake Form</h1>
+
+  <form id="intake-form">
+    <!-- Business Info -->
+    <label>Business Name:</label>
+    <input type="text" name="business_name" required />
+
+    <label>Contact Person:</label>
+    <input type="text" name="contact_person" required />
+
+    <label>Email:</label>
+    <input type="email" name="email" required />
+
+    <label>Phone:</label>
+    <input type="text" name="phone" />
+
+    <label>Website (if any):</label>
+    <input type="text" name="website" />
+
+    <label>Social Media Links:</label>
+    <textarea name="social_links" rows="2"></textarea>
+
+    <!-- Project Overview -->
+    <label>What is the primary purpose of your app/website?</label>
+    <textarea name="purpose" rows="2" required></textarea>
+
+    <label>Brief description of your business:</label>
+    <textarea name="description" rows="3" required></textarea>
+
+    <label>Target audience (age, location, interests):</label>
+    <textarea name="audience" rows="2"></textarea>
+
+    <label>What action should users take?</label>
+    <textarea name="call_to_action" rows="2"></textarea>
+
+    <!-- Features -->
+    <label>What features are needed?</label>
+    <textarea name="features" rows="3" placeholder="Example: Booking, E-Commerce, Contact Form, Blog, Gallery, Login"></textarea>
+
+    <!-- Design -->
+    <label>Do you have a logo or branding?</label>
+    <select name="logo">
+      <option value="">Select</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No, I need help</option>
+    </select>
+
+    <label>Preferred design style:</label>
+    <textarea name="style" rows="2" placeholder="Modern, clean, minimalist, colorful..."></textarea>
+
+    <label>Inspiration websites (links):</label>
+    <textarea name="examples" rows="2"></textarea>
+
+    <!-- Content -->
+    <label>Will you provide the written content?</label>
+    <select name="content">
+      <option value="">Select</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No, I need help</option>
+    </select>
+
+    <label>Will you provide images?</label>
+    <select name="images">
+      <option value="">Select</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No, I need help with stock images</option>
+    </select>
+
+    <!-- Budget -->
+    <label>Estimated number of pages:</label>
+    <input type="text" name="pages" />
+
+    <label>Do you own a domain name?</label>
+    <select name="domain">
+      <option value="">Select</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No, I need help</option>
+    </select>
+
+    <label>Do you have hosting?</label>
+    <select name="hosting">
+      <option value="">Select</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No, I need help</option>
+    </select>
+
+    <label>Budget Range (optional):</label>
+    <input type="text" name="budget" />
+
+    <label>Ideal launch date:</label>
+    <input type="text" name="deadline" />
+
+    <label>Any other notes/questions?</label>
+    <textarea name="notes" rows="3"></textarea>
+
+    <button type="submit">Submit Intake Form</button>
+  </form>
+
+  <div class="success-message" id="success-message" style="display:none;">
+    Thank you! Your intake form was submitted.
+  </div>
+
+  <!-- EmailJS Script -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    emailjs.init("E9OsYJGehSyOtP6bv"); // Replace with your EmailJS Public Key
+
+    const form = document.getElementById("intake-form");
+    const successMessage = document.getElementById("success-message");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      emailjs.sendForm("service_eh25yzg", "template_r8c8xqe", form)
+        .then(() => {
+          form.reset();
+          successMessage.style.display = "block";
+        })
+        .catch((error) => {
+          console.error("EmailJS Error:", error);
+          alert("Something went wrong. Please try again later.");
+        });
+    });
+  </script>
+</body>
+
+</html>
