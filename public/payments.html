@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Make a Payment | CONSTANT CODING LLC</title>
+  <title>Make a Payment | CONSTANTLY CODING LLC</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
@@ -71,19 +71,24 @@
       margin-bottom: 30px;
     }
 
-    form input[type="submit"] {
-      background: #ff7a00;
-      color: #0f172a;
-      border: none;
+    .cashapp-button {
+      display: inline-block;
+      background-color: #00c244;
+      color: #0b1120;
+      font-weight: 700;
       padding: 14px 30px;
-      font-size: 1.1rem;
       border-radius: 8px;
+      font-size: 1.1rem;
+      text-decoration: none;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: background-color 0.3s ease;
+      width: 100%;
+      box-sizing: border-box;
+      text-align: center;
     }
 
-    form input[type="submit"]:hover {
-      background: #e76c00;
+    .cashapp-button:hover {
+      background-color: #00a132;
     }
 
     footer {
@@ -102,6 +107,7 @@
         opacity: 0;
         transform: translateY(10px);
       }
+
       100% {
         opacity: 1;
         transform: translateY(0);
@@ -120,11 +126,6 @@
       p {
         font-size: 0.95rem;
       }
-
-      form input[type="submit"] {
-        width: 100%;
-        font-size: 1rem;
-      }
     }
   </style>
 </head>
@@ -141,12 +142,10 @@
     <h1>Make a Payment</h1>
     <p>Thank you for choosing CONSTANT CODING LLC.<br>Please click below to make a secure payment.</p>
 
-    <!-- PayPal Payment Button -->
-    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-      <input type="hidden" name="cmd" value="_s-xclick" />
-      <input type="hidden" name="hosted_button_id" value="YOUR_PAYPAL_BUTTON_ID" />
-      <input type="submit" value="Pay Now" />
-    </form>
+    <!-- Cash App Payment Button -->
+    <a href="https://cash.app/$Kanothagreat" target="_blank" rel="noopener noreferrer" class="cashapp-button">
+      Pay with Cash App
+    </a>
   </div>
 
   <!-- Footer -->
