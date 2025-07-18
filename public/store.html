@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Store | CONSTANTLY CODING LLC</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      color: white;
+      background-color: #0b1120;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .store-container {
+      background-color: #1e293b;
+      border-radius: 16px;
+      padding: 40px 30px;
+      max-width: 700px;
+      width: 100%;
+      box-shadow: 0 0 25px rgba(56, 189, 248, 0.4);
+      animation: fadeIn 1.5s ease;
+    }
+
+    .store-container h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.8rem;
+      color: #38bdf8;
+      margin-bottom: 20px;
+    }
+
+    .store-container h2 {
+      font-size: 1.5rem;
+      color: #e2e8f0;
+      margin-bottom: 20px;
+    }
+
+    .store-container p {
+      font-size: 1.1rem;
+      color: #cbd5e1;
+      margin-bottom: 30px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: #38bdf8;
+      color: #0f172a;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: background 0.3s ease;
+    }
+
+    .cta-button:hover {
+      background-color: #0ea5e9;
+    }
+
+    footer {
+      margin-top: 40px;
+      color: #94a3b8;
+      font-size: 0.9rem;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .store-container {
+        padding: 30px 20px;
+      }
+
+      .store-container h1 {
+        font-size: 2rem;
+      }
+
+      .store-container h2 {
+        font-size: 1.2rem;
+      }
+
+      .store-container p {
+        font-size: 1rem;
+      }
+
+      .cta-button {
+        width: 100%;
+        padding: 14px;
+        font-size: 1rem;
+      }
+
+      footer {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="store-container">
+    <h1>COMING SOON!</h1>
+    <h2>The Store is under development. We’re working hard to bring it to you.</h2>
+    <p>We appreciate your patience! Stay tuned for more updates and product releases.</p>
+    <a href="home.html" class="cta-button">Back to Home</a>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 CONSTANTLY CODING LLC. All Rights Reserved.</p>
+  </footer>
+
+</body>
+
+</html>
