@@ -63,24 +63,6 @@
     .submit-btn:hover {
       background-color: #0ea5e9;
     }
-    .success-message {
-      display: none;
-      background-color: #1e293b;
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-      margin-top: 20px;
-    }
-    .cta-button {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 12px 20px;
-      background: #38bdf8;
-      color: #0b1120;
-      font-weight: bold;
-      border-radius: 8px;
-      text-decoration: none;
-    }
     footer {
       text-align: center;
       color: #94a3b8;
@@ -93,27 +75,27 @@
   </style>
 </head>
 <body>
+
   <h1>Request a Custom Quote</h1>
 
   <form id="quoteForm">
     <div class="section">
       <h2>Select Services</h2>
-
-      <label><input type="checkbox" name="services" value="300"> Starter Website ($300)</label>
-      <label><input type="checkbox" name="services" value="600"> 5-Page Website ($600)</label>
+      <label><input type="checkbox" name="services" value="200"> Starter Website ($200)</label>
+      <label><input type="checkbox" name="services" value="500"> 5-Page Website ($500)</label>
       <label><input type="checkbox" name="services" value="900"> Web/App Store ($900)</label>
-      <label><input type="checkbox" name="services" value="200"> Home Office Setup ($200)</label>
+      <label><input type="checkbox" name="services" value="150"> Home Office Setup ($150)</label>
       <label><input type="checkbox" name="services" value="400"> Small Office Network ($400)</label>
-      <label><input type="checkbox" name="services" value="700"> Secure Office Network ($700)</label>
-      <label><input type="checkbox" name="services" value="150"> Basic Cabling Drop ($150)</label>
-      <label><input type="checkbox" name="services" value="400"> Office Wiring ($400)</label>
-      <label><input type="checkbox" name="services" value="800"> Full Cabling Package ($800)</label>
-      <label><input type="checkbox" name="services" value="150"> Basic Ticketing System ($150)</label>
-      <label><input type="checkbox" name="services" value="300"> Internal Ticket Suite ($300)</label>
-      <label><input type="checkbox" name="services" value="600"> Advanced Ticketing + Portal ($600)</label>
-      <label><input type="checkbox" name="services" value="150"> Inventory Tracker Lite ($150)</label>
-      <label><input type="checkbox" name="services" value="400"> Asset Suite ($400)</label>
-      <label><input type="checkbox" name="services" value="700"> Smart Management Dashboard ($700)</label>
+      <label><input type="checkbox" name="services" value="750"> Secure Office Network ($750)</label>
+      <label><input type="checkbox" name="services" value="200"> Basic Cabling Drop ($200)</label>
+      <label><input type="checkbox" name="services" value="600"> Office Wiring ($600)</label>
+      <label><input type="checkbox" name="services" value="1000"> Full Cabling Package ($1000)</label>
+      <label><input type="checkbox" name="services" value="200"> Basic Ticketing System ($200)</label>
+      <label><input type="checkbox" name="services" value="400"> Internal Ticket Suite ($400)</label>
+      <label><input type="checkbox" name="services" value="750"> Advanced Ticketing + Portal ($750)</label>
+      <label><input type="checkbox" name="services" value="200"> Inventory Tracker Lite ($200)</label>
+      <label><input type="checkbox" name="services" value="500"> Asset Suite ($500)</label>
+      <label><input type="checkbox" name="services" value="800"> Smart Management Dashboard ($800)</label>
 
       <div class="total">Total: $<span id="totalPrice">0</span></div>
     </div>
@@ -138,13 +120,12 @@
     <input type="hidden" name="selected_services" />
     <input type="hidden" name="total_price" />
 
-    <!-- Submit button with redirect -->
-    <input type="submit" value="Submit Quote Request" class="submit-btn" formaction="quote-success.html" />
+    <input type="submit" value="Submit Quote Request" class="submit-btn" />
   </form>
 
   <footer>&copy; 2025 CONSTANT CODING LLC. All Rights Reserved.</footer>
 
-  <!-- EmailJS Integration -->
+  <!-- EmailJS -->
   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <script>
     emailjs.init("E9OsYJGehSyOtP6bv"); // Your public key
@@ -172,8 +153,9 @@
     checkboxes.forEach(box => box.addEventListener("change", updateTotalAndServices));
 
     form.addEventListener("submit", function (e) {
+      e.preventDefault();
       updateTotalAndServices();
-      // EmailJS send logic remains the same
+
       emailjs.sendForm("service_eh25yzg", "template_r8c8xqe", form)
         .then(() => {
           const formData = new FormData(form);
@@ -183,13 +165,17 @@
             selected_services: formData.get("selected_services"),
             total_price: formData.get("total_price")
           };
+
           return emailjs.send("service_eh25yzg", "template_auto_reply", replyData);
+        })
+        .then(() => {
+          // Redirect after successful submission
+          window.location.href = "quote-success.html";
         })
         .catch(err => {
           console.error("Submission Failed:", err);
           alert("Error submitting form. Try again.");
         });
-      // The redirect will happen because of `formaction`
     });
   </script>
 </body>
