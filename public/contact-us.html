@@ -15,13 +15,11 @@
       max-width: 900px;
       margin: auto;
     }
-
     h1, h2 {
       color: #38bdf8;
       font-family: 'Orbitron', sans-serif;
       text-align: center;
     }
-
     .section {
       background: #1e293b;
       padding: 20px;
@@ -29,16 +27,13 @@
       border-radius: 12px;
       box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
     }
-
     label {
       display: block;
       margin: 10px 0;
     }
-
     input[type="checkbox"], input[type="text"], input[type="email"], textarea {
       margin-top: 5px;
     }
-
     input[type="text"], input[type="email"], textarea {
       width: 100%;
       padding: 12px;
@@ -47,14 +42,12 @@
       border-radius: 6px;
       color: white;
     }
-
     .total {
       font-size: 1.2rem;
       font-weight: bold;
       color: #22d3ee;
       margin-top: 10px;
     }
-
     .submit-btn {
       width: 100%;
       padding: 14px;
@@ -67,11 +60,9 @@
       cursor: pointer;
       margin-top: 20px;
     }
-
     .submit-btn:hover {
       background-color: #0ea5e9;
     }
-
     .success-message {
       display: none;
       background-color: #1e293b;
@@ -80,7 +71,6 @@
       text-align: center;
       margin-top: 20px;
     }
-
     .cta-button {
       display: inline-block;
       margin-top: 10px;
@@ -91,13 +81,11 @@
       border-radius: 8px;
       text-decoration: none;
     }
-
     footer {
       text-align: center;
       color: #94a3b8;
       margin-top: 40px;
     }
-
     @media (max-width: 600px) {
       h1 { font-size: 1.8rem; }
       h2 { font-size: 1.4rem; }
@@ -106,7 +94,6 @@
 </head>
 
 <body>
-
   <h1>Request a Custom Quote</h1>
 
   <form id="quoteForm">
@@ -148,6 +135,10 @@
       </label>
     </div>
 
+    <!-- Hidden fields for EmailJS -->
+    <input type="hidden" name="selected_services" />
+    <input type="hidden" name="total_price" />
+
     <input type="submit" value="Submit Quote Request" class="submit-btn" />
   </form>
 
@@ -166,30 +157,38 @@
     const form = document.getElementById("quoteForm");
     const successMessage = document.getElementById("success-message");
     const totalDisplay = document.getElementById("totalPrice");
-
-    // Update Total Price
     const checkboxes = form.querySelectorAll('input[type="checkbox"]');
-    function updateTotal() {
+    const hiddenServices = form.querySelector('input[name="selected_services"]');
+    const hiddenTotal = form.querySelector('input[name="total_price"]');
+
+    function updateTotalAndServices() {
       let total = 0;
+      let selected = [];
       checkboxes.forEach(box => {
-        if (box.checked) total += parseFloat(box.value);
+        if (box.checked) {
+          total += parseFloat(box.value);
+          selected.push(box.parentNode.textContent.trim());
+        }
       });
       totalDisplay.textContent = total;
+      hiddenServices.value = selected.join(", ");
+      hiddenTotal.value = `$${total}`;
     }
-    checkboxes.forEach(box => box.addEventListener("change", updateTotal));
+
+    checkboxes.forEach(box => box.addEventListener("change", updateTotalAndServices));
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      updateTotal();
+      updateTotalAndServices();
 
-      // Send quote email to business
       emailjs.sendForm("service_eh25yzg", "template_r8c8xqe", form)
         .then(() => {
-          // Send auto-reply to customer
           const formData = new FormData(form);
           const replyData = {
             to_name: formData.get("from_name"),
-            to_email: formData.get("reply_to")
+            to_email: formData.get("reply_to"),
+            selected_services: formData.get("selected_services"),
+            total_price: formData.get("total_price")
           };
 
           return emailjs.send("service_eh25yzg", "template_auto_reply", replyData);
