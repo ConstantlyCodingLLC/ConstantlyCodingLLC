@@ -5,21 +5,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CONSTANTLY CODING LLC - Home</title>
-<!-- Favicon for browser tab -->
-<link rel="icon" href="/vector_ready_logo_2_inPixio.png" type="image/png">
 
-<!-- Open Graph (for Facebook, LinkedIn, etc.) -->
-<meta property="og:title" content="CONSTANTLY CODING LLC" />
-<meta property="og:description" content="Affordable IT, Web, and App Solutions for Mom & Pop Shops." />
-<meta property="og:image" content="https://constantly-coding-llc.vercel.app/vector_ready_logo_2_inPixio.png" />
-<meta property="og:url" content="https://constantly-coding-llc.vercel.app/" />
-<meta property="og:type" content="website" />
+  <!-- Google Search Console Verification -->
+  <meta name="google-site-verification" content="VhRvdJgRxhvfTlB6R3o7odRwoVNg1itMzZCfOZ6Wcl0" />
 
-<!-- Twitter Card Preview -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="CONSTANTLY CODING LLC">
-<meta name="twitter:description" content="Professional Web & IT Services at a fair price.">
-<meta name="twitter:image" content="https://constantly-coding-llc.vercel.app/vector_ready_logo_2_inPixio.png">
+  <!-- Favicon for browser tab -->
+  <link rel="icon" href="/vector_ready_logo_2_inPixio.png" type="image/png">
+
+  <!-- Open Graph (for Facebook, LinkedIn, etc.) -->
+  <meta property="og:title" content="CONSTANTLY CODING LLC" />
+  <meta property="og:description" content="Affordable IT, Web, and App Solutions for Mom & Pop Shops." />
+  <meta property="og:image" content="https://constantly-coding-llc.vercel.app/vector_ready_logo_2_inPixio.png" />
+  <meta property="og:url" content="https://constantly-coding-llc.vercel.app/" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter Card Preview -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CONSTANTLY CODING LLC">
+  <meta name="twitter:description" content="Professional Web & IT Services at a fair price.">
+  <meta name="twitter:image" content="https://constantly-coding-llc.vercel.app/vector_ready_logo_2_inPixio.png">
 
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -30,7 +34,6 @@
       padding: 0;
       box-sizing: border-box;
     }
-
     body {
       font-family: 'Roboto', sans-serif;
       background-color: #0b1120;
@@ -38,7 +41,6 @@
       overflow-x: hidden;
       line-height: 1.6;
     }
-
     nav {
       display: flex;
       justify-content: center;
@@ -46,7 +48,6 @@
       padding: 20px;
       flex-wrap: wrap;
     }
-
     nav a {
       color: #e2e8f0;
       text-decoration: none;
@@ -55,11 +56,9 @@
       font-size: 1.1rem;
       transition: color 0.3s ease;
     }
-
     nav a:hover {
       color: #38bdf8;
     }
-
     .background-logo {
       position: fixed;
       top: 50%;
@@ -72,21 +71,11 @@
       height: auto;
       animation: fadeInBackground 10s infinite;
     }
-
     @keyframes fadeInBackground {
-      0% {
-        opacity: 0.05;
-      }
-
-      50% {
-        opacity: 0.15;
-      }
-
-      100% {
-        opacity: 0.05;
-      }
+      0% { opacity: 0.05; }
+      50% { opacity: 0.15; }
+      100% { opacity: 0.05; }
     }
-
     section {
       min-height: 80vh;
       display: flex;
@@ -97,21 +86,18 @@
       padding: 40px 20px;
       animation: fadeIn 2s ease-in;
     }
-
     h1 {
       font-family: 'Orbitron', sans-serif;
       font-size: 3rem;
       color: #38bdf8;
       margin-bottom: 20px;
     }
-
     p {
       max-width: 800px;
       font-size: 1.2rem;
       margin-bottom: 40px;
       color: #e2e8f0;
     }
-
     .cta-button {
       display: inline-block;
       margin: 10px;
@@ -126,58 +112,33 @@
       transition: all 0.3s ease;
       text-decoration: none;
     }
-
     .cta-button:hover {
       background-color: #38bdf8;
       color: #0b1120;
     }
-
     footer {
       background-color: #1e2a47;
       text-align: center;
       padding: 20px;
       font-weight: 600;
     }
-
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
-
     @media (max-width: 768px) {
-      h1 {
-        font-size: 2.2rem;
-      }
-
-      p {
-        font-size: 1rem;
-      }
-
+      h1 { font-size: 2.2rem; }
+      p { font-size: 1rem; }
       .cta-button {
         width: 100%;
         max-width: 320px;
         font-size: 1rem;
       }
-
-      .background-logo {
-        width: 95%;
-      }
+      .background-logo { width: 95%; }
     }
-
     @media (max-width: 480px) {
-      h1 {
-        font-size: 1.8rem;
-      }
-
-      p {
-        font-size: 0.95rem;
-      }
-
+      h1 { font-size: 1.8rem; }
+      p { font-size: 0.95rem; }
       footer {
         font-size: 0.85rem;
         padding: 16px;
@@ -185,10 +146,10 @@
     }
   </style>
 </head>
+
 <script>
   const form = document.getElementById("reviewForm");
   const reviewsDiv = document.getElementById("reviews");
-
   function loadReviews() {
     const reviews = JSON.parse(localStorage.getItem("reviews") || "[]");
     reviewsDiv.innerHTML = reviews.map(r => `
@@ -198,42 +159,32 @@
       </div>
     `).join("");
   }
-
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     const name = document.getElementById("name").value.trim();
     const message = document.getElementById("message").value.trim();
-
     if (name && message) {
       const newReview = { name, message };
       const existing = JSON.parse(localStorage.getItem("reviews") || "[]");
-      existing.unshift(newReview); // Add newest to top
+      existing.unshift(newReview);
       localStorage.setItem("reviews", JSON.stringify(existing));
       form.reset();
       loadReviews();
     }
   });
-
   loadReviews();
 </script>
 
-
 <body>
-
-  <!-- Optional Background Logo -->
-  
-
-  <!-- Navigation -->
   <header>
     <nav>
       <a href="contact-us.html">Contact Us / Quote </a>
       <a href="store.html">Store</a>
       <a href="payments.html">Payments</a>
-       <a href="portfolio.html">Our Work</a>
+      <a href="portfolio.html">Our Work</a>
     </nav>
   </header>
 
-  <!-- Hero Section -->
   <section>
     <h1>Welcome to CONSTANTLY CODING LLC</h1>
     <p> We’re committed to helping small businesses grow through professional tech solutions that are affordable, reliable, and built just for you. Whether you're starting out or scaling up, we’ve got your back every step of the way.</p>
@@ -242,28 +193,23 @@
       <a href="cable-running.html" class="cta-button">Cable Running</a>
       <a href="app-creation.html" class="cta-button">App Creation</a>
       <a href="networking.html" class="cta-button">Networking</a>
-        <a href="hotshot.html" class="cta-button">Hotshot Trucking</a>
+      <a href="hotshot.html" class="cta-button">Hotshot Trucking</a>
     </div>
   </section>
-<!-- Compact Review Section Without Background -->
-<section style="padding: 30px 20px;">
-  <h2 style="color: #38bdf8; margin-bottom: 20px; font-size: 1.5rem; text-align: center;">Leave a Review</h2>
 
-  <form id="reviewForm" style="max-width: 500px; margin: 0 auto; text-align: left;">
-    <input type="text" id="name" placeholder="Your Name" required style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 6px; border: none;">
-    <textarea id="message" placeholder="Your Review" required rows="3" style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 6px; border: none;"></textarea>
-    <button type="submit" style="padding: 8px 16px; background-color: #38bdf8; border: none; color: #0b1120; font-weight: bold; border-radius: 6px; cursor: pointer;">Post</button>
-  </form>
+  <section style="padding: 30px 20px;">
+    <h2 style="color: #38bdf8; margin-bottom: 20px; font-size: 1.5rem; text-align: center;">Leave a Review</h2>
+    <form id="reviewForm" style="max-width: 500px; margin: 0 auto; text-align: left;">
+      <input type="text" id="name" placeholder="Your Name" required style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 6px; border: none;">
+      <textarea id="message" placeholder="Your Review" required rows="3" style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 6px; border: none;"></textarea>
+      <button type="submit" style="padding: 8px 16px; background-color: #38bdf8; border: none; color: #0b1120; font-weight: bold; border-radius: 6px; cursor: pointer;">Post</button>
+    </form>
+    <div id="reviews" style="max-width: 600px; margin: 20px auto 0;"></div>
+  </section>
 
-  <div id="reviews" style="max-width: 600px; margin: 20px auto 0;"></div>
-</section>
-
-
-  <!-- Footer -->
   <footer>
     <p>&copy; 2025 CONSTANTLY CODING LLC. All Rights Reserved.</p>
   </footer>
-
 </body>
 
 </html>
