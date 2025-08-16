@@ -17,10 +17,32 @@
     .submit-btn { width: 100%; padding: 14px; background-color: #38bdf8; color: #0f172a; font-weight: bold; border: none; border-radius: 8px; font-size: 1rem; cursor: pointer; margin-top: 20px; }
     .submit-btn:hover { background-color: #0ea5e9; }
     footer { text-align: center; color: #94a3b8; margin-top: 40px; }
-    @media (max-width: 600px) { h1 { font-size: 1.8rem; } h2 { font-size: 1.4rem; } }
+    .home-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: #38bdf8;
+      color: #0f172a;
+      padding: 10px 18px;
+      border-radius: 6px;
+      font-weight: bold;
+      text-decoration: none;
+      z-index: 1000;
+      box-shadow: 0 0 8px rgba(0,0,0,0.3);
+    }
+    .home-btn:hover {
+      background-color: #0ea5e9;
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 1.8rem; }
+      h2 { font-size: 1.4rem; }
+    }
   </style>
 </head>
 <body>
+
+<!-- Fixed Home Button -->
+<a href="home.html" class="home-btn">Home</a>
 
 <h1>Request a Custom Quote</h1>
 
@@ -60,7 +82,7 @@
   <input type="submit" value="Submit Quote Request" class="submit-btn" />
 </form>
 
-<footer>&copy; 2025 CONSTANT CODING LLC. All Rights Reserved.</footer>
+<footer>&copy; 2025 CONSTANTLY CODING LLC. All Rights Reserved.</footer>
 
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 <script>
@@ -92,7 +114,6 @@ form.addEventListener("submit", function(e){
   e.preventDefault();
   updateTotalAndServices();
 
-  // Send main EmailJS email
   emailjs.sendForm("service_eh25yzg", "template_r8c8xqe", form)
     .then(() => {
       const formData = new FormData(form);
@@ -102,11 +123,9 @@ form.addEventListener("submit", function(e){
         selected_services: formData.get("selected_services"),
         total_price: formData.get("total_price")
       };
-      // Send auto-reply email
       return emailjs.send("service_eh25yzg", "template_auto_reply", replyData);
     })
     .then(() => {
-      // Only redirect after both emails are successfully sent
       window.location.href = "quote-success.html";
     })
     .catch(err => {
