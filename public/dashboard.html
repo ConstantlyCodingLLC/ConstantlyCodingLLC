@@ -38,7 +38,7 @@ textarea, input[type=email], input[type=text] { width:100%; padding:10px; margin
 <!-- User Info -->
 <div class="card">
 <h2>User Info</h2>
-<p>Email: <span id="userEmail">demo@user.com</span></p>
+<p>Email: <span id="userEmail">Loading...</span></p>
 <p>Account Created: <span id="createdAt">Loading...</span></p>
 <p>Tier: <span id="userTier" class="highlight">Basic</span></p>
 </div>
@@ -94,21 +94,21 @@ textarea, input[type=email], input[type=text] { width:100%; padding:10px; margin
 <form id="quoteForm">
   <div class="section">
     <h3>Select Services</h3>
-    <label><input type="checkbox" name="services" value="Starter Website ($150)"> Starter Website ($150)</label>
-    <label><input type="checkbox" name="services" value="5-Page Website ($400)"> 5-Page Website ($400)</label>
-    <label><input type="checkbox" name="services" value="Web/App Store ($600)"> Web/App Store ($600)</label>
-    <label><input type="checkbox" name="services" value="Home Office Setup ($100)"> Home Office Setup ($100)</label>
-    <label><input type="checkbox" name="services" value="Small Office Network ($250)"> Small Office Network ($250)</label>
-    <label><input type="checkbox" name="services" value="Secure Office Network ($400)"> Secure Office Network ($400)</label>
-    <label><input type="checkbox" name="services" value="Basic Cabling Drop ($100)"> Basic Cabling Drop ($100)</label>
-    <label><input type="checkbox" name="services" value="Office Wiring ($300)"> Office Wiring ($300)</label>
-    <label><input type="checkbox" name="services" value="Full Cabling Package ($500)"> Full Cabling Package ($500)</label>
-    <label><input type="checkbox" name="services" value="Basic Ticketing System ($150)"> Basic Ticketing System ($150)</label>
-    <label><input type="checkbox" name="services" value="Internal Ticket Suite ($300)"> Internal Ticket Suite ($300)</label>
-    <label><input type="checkbox" name="services" value="Advanced Ticketing + Portal ($500)"> Advanced Ticketing + Portal ($500)</label>
-    <label><input type="checkbox" name="services" value="Inventory Tracker Lite ($150)"> Inventory Tracker Lite ($150)</label>
-    <label><input type="checkbox" name="services" value="Asset Suite ($400)"> Asset Suite ($400)</label>
-    <label><input type="checkbox" name="services" value="Smart Management Dashboard ($600)"> Smart Management Dashboard ($600)</label>
+    <label><input type="checkbox" name="services" value="150"> Starter Website ($150)</label>
+    <label><input type="checkbox" name="services" value="400"> 5-Page Website ($400)</label>
+    <label><input type="checkbox" name="services" value="600"> Web/App Store ($600)</label>
+    <label><input type="checkbox" name="services" value="100"> Home Office Setup ($100)</label>
+    <label><input type="checkbox" name="services" value="250"> Small Office Network ($250)</label>
+    <label><input type="checkbox" name="services" value="400"> Secure Office Network ($400)</label>
+    <label><input type="checkbox" name="services" value="100"> Basic Cabling Drop ($100)</label>
+    <label><input type="checkbox" name="services" value="300"> Office Wiring ($300)</label>
+    <label><input type="checkbox" name="services" value="500"> Full Cabling Package ($500)</label>
+    <label><input type="checkbox" name="services" value="150"> Basic Ticketing System ($150)</label>
+    <label><input type="checkbox" name="services" value="300"> Internal Ticket Suite ($300)</label>
+    <label><input type="checkbox" name="services" value="500"> Advanced Ticketing + Portal ($500)</label>
+    <label><input type="checkbox" name="services" value="150"> Inventory Tracker Lite ($150)</label>
+    <label><input type="checkbox" name="services" value="400"> Asset Suite ($400)</label>
+    <label><input type="checkbox" name="services" value="600"> Smart Management Dashboard ($600)</label>
     <div class="total">Total: $<span id="totalPrice">0</span></div>
   </div>
 
@@ -124,12 +124,43 @@ textarea, input[type=email], input[type=text] { width:100%; padding:10px; margin
 </form>
 </div>
 
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDUAxWp7O_0mfGS82Yl3AS0qp7w_JNR5dY",
+  authDomain: "customer-portal-4322c.firebaseapp.com",
+  projectId: "customer-portal-4322c",
+  storageBucket: "customer-portal-4322c.appspot.com",
+  messagingSenderId: "934096556659",
+  appId: "1:934096556659:web:50f18d5e9e851d86131006"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// Redirect if not logged in
+onAuthStateChanged(auth, user => {
+  if (!user) {
+    window.location.href = "portal.html";
+    return;
+  }
+  document.getElementById("userEmail").textContent = user.email;
+  document.getElementById("createdAt").textContent = user.metadata.creationTime;
+});
+
+// Logout
+document.getElementById("logoutBtn").addEventListener("click", () => {
+  signOut(auth)
+    .then(() => window.location.href="portal.html")
+    .catch(err => alert("Logout error: "+err.message));
+});
+</script>
+
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
 emailjs.init("E9OsYJGehSyOtP6bv"); // Your public key
-
-// Logout simulation
-document.getElementById("logoutBtn").addEventListener("click",()=>alert("Logging out..."));
 
 // Calculate total price
 const totalPriceSpan = document.getElementById("totalPrice");
