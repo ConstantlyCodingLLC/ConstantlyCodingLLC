@@ -1,214 +1,280 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard | CONSTANTLY CODING LLC</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Roboto', sans-serif; background:#0d1117; color:white; margin:0; padding:0;}
-    header { background:#161b22; padding:15px 20px; display:flex; justify-content:space-between; align-items:center;}
-    header h1 { font-size:1.5rem; color:#38bdf8; margin:0; }
-    header button { background:#38bdf8; border:none; padding:8px 14px; border-radius:6px; font-weight:bold; cursor:pointer; color:#0d1117; margin-left:8px;}
-    header button:hover { background:#0ea5e9; }
-    main { padding:20px; max-width:1000px; margin:0 auto; }
-    .card { background:#161b22; padding:15px 20px; border-radius:10px; margin-bottom:15px; box-shadow:0 4px 10px rgba(0,0,0,0.4);}
-    h2 { color:#38bdf8; margin-bottom:10px; }
-    ul { list-style:none; padding:0; }
-    li { padding:5px 0; border-bottom:1px solid #0d1117; }
-    .highlight { color:#22c55e; font-weight:bold; }
-    #storeItems div { border:1px solid #0d1117; padding:10px; margin-bottom:10px; border-radius:6px;}
-    #storeItems button { margin-top:5px; width:100%; }
-    textarea { width:100%; padding:10px; margin-top:10px; border-radius:6px; border:none; outline:none;}
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard | CONSTANTLY CODING LLC</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet">
+<style>
+body { font-family: 'Roboto', sans-serif; background:#0d1117; color:white; margin:0; padding:0;}
+header { background:#161b22; padding:15px 20px; display:flex; justify-content:space-between; align-items:center;}
+header h1 { font-size:1.5rem; color:#38bdf8; margin:0; }
+header button { background:#38bdf8; border:none; padding:8px 14px; border-radius:6px; font-weight:bold; cursor:pointer; color:#0d1117; margin-left:8px;}
+header button:hover { background:#0ea5e9; }
+main { padding:20px; max-width:1000px; margin:0 auto; }
+.card { background:#161b22; padding:15px 20px; border-radius:10px; margin-bottom:15px; box-shadow:0 4px 10px rgba(0,0,0,0.4);}
+h2 { color:#38bdf8; margin-bottom:10px; }
+ul { list-style:none; padding:0; }
+li { padding:5px 0; border-bottom:1px solid #0d1117; }
+.highlight { color:#22c55e; font-weight:bold; }
+#storeItems div { border:1px solid #0d1117; padding:10px; margin-bottom:10px; border-radius:6px;}
+#storeItems button { margin-top:5px; width:100%; }
+textarea { width:100%; padding:10px; margin-top:10px; border-radius:6px; border:none; outline:none;}
+input[type=checkbox] { margin-right:8px; }
+#quoteForm label { display:block; margin-bottom:5px; }
+#quoteForm button { margin-top:10px; width:100%; }
+</style>
 </head>
 <body>
 
 <header>
-  <h1>Dashboard</h1>
-  <div>
-    <button onclick="window.location.href='home.html'">🏠 Home</button>
-    <button id="logoutBtn">Logout</button>
-  </div>
+<h1>Dashboard</h1>
+<div>
+  <button onclick="window.location.href='home.html'">🏠 Home</button>
+  <button id="logoutBtn">Logout</button>
+</div>
 </header>
 
 <main>
-  <!-- User Info -->
-  <div class="card">
-    <h2>User Info</h2>
-    <p>Email: <span id="userEmail">Loading...</span></p>
-    <p>Account Created: <span id="createdAt">Loading...</span></p>
-    <p>Tier: <span id="userTier" class="highlight">Loading...</span></p>
-  </div>
+<!-- User Info -->
+<div class="card">
+<h2>User Info</h2>
+<p>Email: <span id="userEmail">Loading...</span></p>
+<p>Account Created: <span id="createdAt">Loading...</span></p>
+<p>Tier: <span id="userTier" class="highlight">Loading...</span></p>
+</div>
 
-  <!-- Tickets -->
-  <div class="card">
-    <h2>Tickets</h2>
-    <ul id="ticketsList"><li>Loading tickets...</li></ul>
-  </div>
+<!-- Tickets -->
+<div class="card">
+<h2>Tickets</h2>
+<ul id="ticketsList"><li>Loading tickets...</li></ul>
+</div>
 
-  <!-- Purchases -->
-  <div class="card">
-    <h2>Purchases</h2>
-    <ul id="purchasesList"><li>Loading purchases...</li></ul>
-  </div>
+<!-- Purchases -->
+<div class="card">
+<h2>Purchases</h2>
+<ul id="purchasesList"><li>Loading purchases...</li></ul>
+</div>
 
-  <!-- Deals -->
-  <div class="card">
-    <h2>Exclusive Device Deals</h2>
-    <ul id="dealsList"><li>Loading deals...</li></ul>
-  </div>
+<!-- Exclusive Device Deals -->
+<div class="card">
+<h2>Exclusive Device Deals</h2>
+<ul id="dealsList"><li>Loading deals...</li></ul>
+</div>
 
-  <!-- Store Items -->
-  <div class="card">
-    <h2>Store</h2>
-    <div id="storeItems">Loading store...</div>
-  </div>
+<!-- Store Items -->
+<div class="card">
+<h2>Store</h2>
+<div id="storeItems">Loading store...</div>
+</div>
 
-  <!-- Checkout -->
-  <div class="card">
-    <h2>Checkout</h2>
-    <ul id="cartList"><li>No items in cart.</li></ul>
-    <p>Total: $<span id="cartTotal">0</span></p>
-    <button id="checkoutBtn">Place Order</button>
-  </div>
+<!-- Checkout -->
+<div class="card">
+<h2>Checkout</h2>
+<ul id="cartList"><li>No items in cart.</li></ul>
+<p>Total: $<span id="cartTotal">0</span></p>
+<button id="checkoutBtn">Place Order</button>
+</div>
 
-  <!-- Messaging -->
-  <div class="card">
-    <h2>Messages</h2>
-    <ul id="messagesList"><li>No messages yet.</li></ul>
-    <textarea id="newMessage" placeholder="Type your message here..."></textarea>
-    <button id="sendMessageBtn">Send Message</button>
-  </div>
-</main>
+<!-- Messaging -->
+<div class="card">
+<h2>Messages</h2>
+<ul id="messagesList"><li>No messages yet.</li></ul>
+<textarea id="newMessage" placeholder="Type your message here..."></textarea>
+<button id="sendMessageBtn">Send Message</button>
+</div>
+
+<!-- Quote Form -->
+<div class="card">
+<h2>Request a Quote</h2>
+<form id="quoteForm">
+  <label><input type="checkbox" name="services" value="150"> Starter Website ($150)</label>
+  <label><input type="checkbox" name="services" value="400"> 5-Page Website ($400)</label>
+  <label><input type="checkbox" name="services" value="600"> Web/App Store ($600)</label>
+  <label><input type="checkbox" name="services" value="100"> Home Office Setup ($100)</label>
+  <label><input type="checkbox" name="services" value="250"> Small Office Network ($250)</label>
+  <label><input type="checkbox" name="services" value="400"> Secure Office Network ($400)</label>
+  <label><input type="checkbox" name="services" value="100"> Basic Cabling Drop ($100)</label>
+  <label><input type="checkbox" name="services" value="300"> Office Wiring ($300)</label>
+  <label><input type="checkbox" name="services" value="500"> Full Cabling Package ($500)</label>
+  <label><input type="checkbox" name="services" value="150"> Basic Ticketing System ($150)</label>
+  <label><input type="checkbox" name="services" value="300"> Internal Ticket Suite ($300)</label>
+  <label><input type="checkbox" name="services" value="500"> Advanced Ticketing + Portal ($500)</label>
+  <label><input type="checkbox" name="services" value="150"> Inventory Tracker Lite ($150)</label>
+  <label><input type="checkbox" name="services" value="400"> Asset Suite ($400)</label>
+  <label><input type="checkbox" name="services" value="600"> Smart Management Dashboard ($600)</label>
+  <p>Total: $<span id="totalPrice">0</span></p>
+  <button type="submit">Submit Quote</button>
+</form>
+</div>
 
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-  import { getFirestore, doc, getDoc, updateDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+import { getFirestore, doc, getDoc, updateDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyDUAxWp7O_0mfGS82Yl3AS0qp7w_JNR5dY",
-    authDomain: "customer-portal-4322c.firebaseapp.com",
-    projectId: "customer-portal-4322c",
-    storageBucket: "customer-portal-4322c.appspot.com",
-    messagingSenderId: "934096556659",
-    appId: "1:934096556659:web:50f18d5e9e851d86131006"
-  };
+// Firebase Config
+const firebaseConfig = {
+apiKey: "AIzaSyDUAxWp7O_0mfGS82Yl3AS0qp7w_JNR5dY",
+authDomain: "customer-portal-4322c.firebaseapp.com",
+projectId: "customer-portal-4322c",
+storageBucket: "customer-portal-4322c.appspot.com",
+messagingSenderId: "934096556659",
+appId: "1:934096556659:web:50f18d5e9e851d86131006"
+};
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-  const userEmailSpan = document.getElementById("userEmail");
-  const createdAtSpan = document.getElementById("createdAt");
-  const userTierSpan = document.getElementById("userTier");
-  const ticketsList = document.getElementById("ticketsList");
-  const purchasesList = document.getElementById("purchasesList");
-  const dealsList = document.getElementById("dealsList");
-  const logoutBtn = document.getElementById("logoutBtn");
-  const storeItemsDiv = document.getElementById("storeItems");
-  const cartList = document.getElementById("cartList");
-  const cartTotalSpan = document.getElementById("cartTotal");
-  const checkoutBtn = document.getElementById("checkoutBtn");
-  const messagesList = document.getElementById("messagesList");
-  const newMessage = document.getElementById("newMessage");
-  const sendMessageBtn = document.getElementById("sendMessageBtn");
+// Elements
+const userEmailSpan = document.getElementById("userEmail");
+const createdAtSpan = document.getElementById("createdAt");
+const userTierSpan = document.getElementById("userTier");
+const ticketsList = document.getElementById("ticketsList");
+const purchasesList = document.getElementById("purchasesList");
+const dealsList = document.getElementById("dealsList");
+const logoutBtn = document.getElementById("logoutBtn");
+const storeItemsDiv = document.getElementById("storeItems");
+const cartList = document.getElementById("cartList");
+const cartTotalSpan = document.getElementById("cartTotal");
+const checkoutBtn = document.getElementById("checkoutBtn");
+const messagesList = document.getElementById("messagesList");
+const newMessage = document.getElementById("newMessage");
+const sendMessageBtn = document.getElementById("sendMessageBtn");
 
-  let cart = [];
+const quoteForm = document.getElementById('quoteForm');
+const totalPriceSpan = document.getElementById('totalPrice');
 
-  function renderCart() {
-    if(cart.length === 0){
-      cartList.innerHTML = "<li>No items in cart.</li>";
-      cartTotalSpan.textContent = "0";
-      return;
-    }
-    cartList.innerHTML = cart.map(item => `<li>${item.name} - $${item.price}</li>`).join("");
-    const total = cart.reduce((sum, item) => sum + item.price, 0);
-    cartTotalSpan.textContent = total.toFixed(2);
-  }
+let cart = [];
 
-  function getDealsForTier(tier){
-    const deals = {
-      Basic:["10% off first repair","Free diagnostic on one device"],
-      Premium:["25% off upgrades","Priority tickets","Free extended warranty"],
-      Elite:["50% off new devices","24/7 VIP Support","Annual system health check"]
-    };
-    return deals[tier] || ["No special deals for this tier."];
-  }
+// Cart rendering
+function renderCart() {
+if(cart.length === 0){
+  cartList.innerHTML = "<li>No items in cart.</li>";
+  cartTotalSpan.textContent = "0";
+  return;
+}
+cartList.innerHTML = cart.map(item => `<li>${item.name} - $${item.price}</li>`).join("");
+const total = cart.reduce((sum, item) => sum + item.price, 0);
+cartTotalSpan.textContent = total.toFixed(2);
+}
 
-  // Logout
-  logoutBtn.addEventListener("click", () => {
-    signOut(auth).then(()=> window.location.href="portal.html").catch(err=>alert(err.message));
-  });
+// Tier deals
+function getDealsForTier(tier){
+const deals = {
+  Basic:["10% off first repair","Free diagnostic on one device"],
+  Premium:["25% off upgrades","Priority tickets","Free extended warranty"],
+  Elite:["50% off new devices","24/7 VIP Support","Annual system health check"]
+};
+return deals[tier] || ["No special deals for this tier."];
+}
 
-  onAuthStateChanged(auth, async (user)=>{
-    if(!user){ window.location.href="portal.html"; return; }
-    userEmailSpan.textContent = user.email;
-    createdAtSpan.textContent = user.metadata.creationTime;
+// Logout
+logoutBtn.addEventListener("click", () => {
+signOut(auth).then(()=> window.location.href="portal.html").catch(err=>alert(err.message));
+});
 
-    const userDocRef = doc(db,"users",user.uid);
-    const docSnap = await getDoc(userDocRef);
-    const data = docSnap.exists()? docSnap.data(): {};
+// Auth State
+onAuthStateChanged(auth, async (user)=>{
+if(!user){ window.location.href="portal.html"; return; }
+userEmailSpan.textContent = user.email;
+createdAtSpan.textContent = user.metadata.creationTime;
 
-    const tier = data.tier || "Basic";
-    userTierSpan.textContent = tier;
+const userDocRef = doc(db,"users",user.uid);
+const docSnap = await getDoc(userDocRef);
+const data = docSnap.exists()? docSnap.data(): {};
 
-    ticketsList.innerHTML = (data.tickets && data.tickets.length)? data.tickets.map(t=>`<li>${t}</li>`).join("") : "<li>No tickets yet.</li>";
-    purchasesList.innerHTML = (data.purchases && data.purchases.length)? data.purchases.map(p=>`<li>${p.itemName} - $${p.itemPrice} - ${p.date.toDate? p.date.toDate().toLocaleString() : p.date}</li>`).join("") : "<li>No purchases yet.</li>";
-    dealsList.innerHTML = getDealsForTier(tier).map(d=>`<li>${d}</li>`).join("");
+const tier = data.tier || "Basic";
+userTierSpan.textContent = tier;
 
-    // Load messages
-    const messages = data.messages || [];
-    messagesList.innerHTML = messages.map(m=>`<li><strong>${m.from}:</strong> ${m.message}</li>`).join("");
+ticketsList.innerHTML = (data.tickets && data.tickets.length)? data.tickets.map(t=>`<li>${t}</li>`).join("") : "<li>No tickets yet.</li>";
+purchasesList.innerHTML = (data.purchases && data.purchases.length)? data.purchases.map(p=>`<li>${p.itemName} - $${p.itemPrice} - ${p.date.toDate? p.date.toDate().toLocaleString() : p.date}</li>`).join("") : "<li>No purchases yet.</li>";
+dealsList.innerHTML = getDealsForTier(tier).map(d=>`<li>${d}</li>`).join("");
 
-    // Load store items
-    const storeSnapshot = await getDocs(collection(db,"storeItems"));
-    storeSnapshot.forEach(docItem=>{
-      const item = docItem.data();
-      const itemDiv = document.createElement("div");
-      itemDiv.innerHTML = `<p><strong>${item.name}</strong> - $${item.price}</p><p>${item.description}</p><button>Add to Cart</button>`;
-      itemDiv.querySelector("button").onclick = ()=>{
-        cart.push({name:item.name,price:item.price});
-        renderCart();
-      };
-      storeItemsDiv.appendChild(itemDiv);
-    });
-  });
+// Messages
+const messages = data.messages || [];
+messagesList.innerHTML = messages.map(m=>`<li><strong>${m.from}:</strong> ${m.message}</li>`).join("");
 
-  // Checkout
-  checkoutBtn.addEventListener("click", async ()=>{
-    if(cart.length===0) return alert("Cart empty!");
-    const user = auth.currentUser;
-    const userDocRef = doc(db,"users",user.uid);
-    const docSnap = await getDoc(userDocRef);
-    const data = docSnap.data() || {};
-    const purchases = data.purchases || [];
-    const now = new Date();
-    cart.forEach(item=>purchases.push({itemName:item.name, itemPrice:item.price, date:now}));
-    await updateDoc(userDocRef,{purchases});
-    alert("Order placed!");
-    cart=[];
+// Store items
+const storeSnapshot = await getDocs(collection(db,"storeItems"));
+storeSnapshot.forEach(docItem=>{
+  const item = docItem.data();
+  const itemDiv = document.createElement("div");
+  itemDiv.innerHTML = `<p><strong>${item.name}</strong> - $${item.price}</p><p>${item.description}</p><button>Add to Cart</button>`;
+  itemDiv.querySelector("button").onclick = ()=>{
+    cart.push({name:item.name,price:item.price});
     renderCart();
-    purchasesList.innerHTML = purchases.map(p=>`<li>${p.itemName} - $${p.itemPrice} - ${p.date.toDate? p.date.toDate().toLocaleString() : p.date}</li>`).join("");
-  });
+  };
+  storeItemsDiv.appendChild(itemDiv);
+});
+});
 
-  // Messaging
-  sendMessageBtn.addEventListener("click", async ()=>{
-    const user = auth.currentUser;
-    const messageText = newMessage.value.trim();
-    if(!messageText) return alert("Message cannot be empty!");
-    const userDocRef = doc(db,"users",user.uid);
-    const docSnap = await getDoc(userDocRef);
-    const data = docSnap.data() || {};
-    const messages = data.messages || [];
-    messages.push({message:messageText,from:"user",date:new Date()});
-    await updateDoc(userDocRef,{messages});
-    newMessage.value="";
-    messagesList.innerHTML = messages.map(m=>`<li><strong>${m.from}:</strong> ${m.message}</li>`).join("");
-  });
+// Checkout
+checkoutBtn.addEventListener("click", async ()=>{
+if(cart.length===0) return alert("Cart empty!");
+const user = auth.currentUser;
+const userDocRef = doc(db,"users",user.uid);
+const docSnap = await getDoc(userDocRef);
+const data = docSnap.data() || {};
+const purchases = data.purchases || [];
+const now = new Date();
+cart.forEach(item=>purchases.push({itemName:item.name, itemPrice:item.price, date:now}));
+await updateDoc(userDocRef,{purchases});
+alert("Order placed!");
+cart=[];
+renderCart();
+purchasesList.innerHTML = purchases.map(p=>`<li>${p.itemName} - $${p.itemPrice} - ${p.date.toDate? p.date.toDate().toLocaleString() : p.date}</li>`).join("");
+});
 
-  renderCart();
+// Messaging
+sendMessageBtn.addEventListener("click", async ()=>{
+const user = auth.currentUser;
+const messageText = newMessage.value.trim();
+if(!messageText) return alert("Message cannot be empty!");
+const userDocRef = doc(db,"users",user.uid);
+const docSnap = await getDoc(userDocRef);
+const data = docSnap.data() || {};
+const messages = data.messages || [];
+messages.push({message:messageText,from:"user",date:new Date()});
+await updateDoc(userDocRef,{messages});
+newMessage.value="";
+messagesList.innerHTML = messages.map(m=>`<li><strong>${m.from}:</strong> ${m.message}</li>`).join("");
+});
+
+// Quote Form
+function calculateTotal() {
+const selected = Array.from(quoteForm.elements['services']).filter(cb => cb.checked);
+const total = selected.reduce((sum, cb) => sum + parseFloat(cb.value), 0);
+totalPriceSpan.textContent = total;
+}
+Array.from(quoteForm.elements['services']).forEach(cb => cb.addEventListener('change', calculateTotal));
+quoteForm.addEventListener('submit', async (e) => {
+e.preventDefault();
+const user = auth.currentUser;
+if(!user) return alert("You must be logged in to submit a quote.");
+const selected = Array.from(quoteForm.elements['services']).filter(cb => cb.checked);
+if(selected.length === 0) return alert("Please select at least one service.");
+const quote = {
+services: selected.map(cb => cb.nextSibling.textContent.trim()),
+total: selected.reduce((sum, cb) => sum + parseFloat(cb.value), 0),
+date: new Date()
+};
+const userDocRef = doc(db, 'users', user.uid);
+const docSnap = await getDoc(userDocRef);
+const data = docSnap.data() || {};
+const quotes = data.quotes || [];
+quotes.push(quote);
+await updateDoc(userDocRef, { quotes });
+alert("Quote submitted!");
+quoteForm.reset();
+calculateTotal();
+});
+calculateTotal();
+
+// Initialize cart display
+renderCart();
 </script>
+
 </body>
 </html>
