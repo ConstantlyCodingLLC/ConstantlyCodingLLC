@@ -105,10 +105,17 @@
       auth.createUserWithEmailAndPassword(email, password)
         .then(userCredential => {
           const uid = userCredential.user.uid;
-          // Create initial Firestore document
-          db.collection("users").doc(uid).set({ email, purchases: [], tickets: [] });
-          alert("Account created! Redirecting...");
-          window.location.href = "dashboard.html";
+
+          // Save user info to Firestore for tracking
+          db.collection("users").doc(uid).set({
+            email: email,
+            createdAt: new Date(),
+            purchases: [],
+            tickets: []
+          }).then(() => {
+            alert("Account created! Redirecting to Dashboard...");
+            window.location.href = "dashboard.html";
+          });
         })
         .catch(error => alert(error.message));
     }
