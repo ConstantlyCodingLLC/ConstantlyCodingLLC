@@ -1,158 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Make a Payment | CONSTANTLY CODING LLC</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <title>Dashboard | CONSTANTLY CODING LLC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Roboto', sans-serif;
-      background-color: #0b1120;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      align-items: center;
-      padding: 20px;
-    }
-
-    .home-button {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-    }
-
-    .home-button button {
-      background: transparent;
-      border: 2px solid #38bdf8;
-      color: #38bdf8;
-      padding: 10px 20px;
-      font-size: 1rem;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .home-button button:hover {
-      background-color: #38bdf8;
-      color: #0b1120;
-    }
-
-    .container {
-      max-width: 500px;
-      width: 100%;
-      background-color: #1e293b;
-      padding: 30px 25px;
-      border-radius: 12px;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
-      text-align: center;
-      animation: fadeIn 1.2s ease;
-      margin-top: 100px;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      color: #38bdf8;
-      margin-bottom: 20px;
-    }
-
-    p {
-      font-size: 1rem;
-      color: #e2e8f0;
-      margin-bottom: 30px;
-    }
-
-    .cashapp-button {
-      display: inline-block;
-      background-color: #00c244;
-      color: #0b1120;
-      font-weight: 700;
-      padding: 14px 30px;
-      border-radius: 8px;
-      font-size: 1.1rem;
-      text-decoration: none;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      width: 100%;
-      box-sizing: border-box;
-      text-align: center;
-    }
-
-    .cashapp-button:hover {
-      background-color: #00a132;
-    }
-
-    footer {
-      margin-top: auto;
-      background-color: #1e2a47;
-      color: #e2e8f0;
-      text-align: center;
-      padding: 16px;
-      font-size: 0.9rem;
-      width: 100%;
-      border-top: 1px solid #2c3e50;
-    }
-
-    @keyframes fadeIn {
-      0% {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @media (max-width: 480px) {
-      .container {
-        padding: 20px 15px;
-      }
-
-      h1 {
-        font-size: 2rem;
-      }
-
-      p {
-        font-size: 0.95rem;
-      }
-    }
+    body { font-family: 'Roboto', sans-serif; background:#0d1117; color:white; margin:0; padding:0;}
+    header { background:#161b22; padding:15px 20px; display:flex; justify-content:space-between; align-items:center;}
+    header h1 { font-size:1.5rem; color:#38bdf8; margin:0; }
+    header button { background:#38bdf8; border:none; padding:8px 14px; border-radius:6px; font-weight:bold; cursor:pointer; color:#0d1117; margin-left:8px;}
+    header button:hover { background:#0ea5e9; }
+    main { padding:20px; max-width:1000px; margin:0 auto; }
+    .card { background:#161b22; padding:15px 20px; border-radius:10px; margin-bottom:15px; box-shadow:0 4px 10px rgba(0,0,0,0.4);}
+    h2 { color:#38bdf8; margin-bottom:10px; }
+    ul { list-style:none; padding:0; }
+    li { padding:5px 0; border-bottom:1px solid #0d1117; }
+    .highlight { color:#22c55e; font-weight:bold; }
+    #storeItems div { border:1px solid #0d1117; padding:10px; margin-bottom:10px; border-radius:6px;}
+    #storeItems button { margin-top:5px; width:100%; }
+    textarea { width:100%; padding:10px; margin-top:10px; border-radius:6px; border:none; outline:none;}
   </style>
 </head>
-
 <body>
 
-  <!-- Home Button -->
-  <div class="home-button">
-    <button onclick="window.location.href='home.html';">HOME</button>
+<header>
+  <h1>Dashboard</h1>
+  <div>
+    <button onclick="window.location.href='home.html'">🏠 Home</button>
+    <button id="logoutBtn">Logout</button>
+  </div>
+</header>
+
+<main>
+  <!-- User Info -->
+  <div class="card">
+    <h2>User Info</h2>
+    <p>Email: <span id="userEmail">Loading...</span></p>
+    <p>Account Created: <span id="createdAt">Loading...</span></p>
+    <p>Tier: <span id="userTier" class="highlight">Loading...</span></p>
   </div>
 
-  <!-- Payment Card -->
-  <div class="container">
-    <h1>Make a Payment</h1>
-    <p>Thank you for choosing CONSTANTLY CODING LLC.<br>Please click below to make a secure payment.</p>
-
-    <!-- Cash App Payment Button -->
-    <a href="https://cash.app/$Kanothagreat" target="_blank" rel="noopener noreferrer" class="cashapp-button">
-      Pay Here
-    </a>
+  <!-- Tickets -->
+  <div class="card">
+    <h2>Tickets</h2>
+    <ul id="ticketsList"><li>Loading tickets...</li></ul>
   </div>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 CONSTANTLY CODING LLC. All Rights Reserved.</p>
-  </footer>
+  <!-- Purchases -->
+  <div class="card">
+    <h2>Purchases</h2>
+    <ul id="purchasesList"><li>Loading purchases...</li></ul>
+  </div>
 
+  <!-- Deals -->
+  <div class="card">
+    <h2>Exclusive Device Deals</h2>
+    <ul id="dealsList"><li>Loading deals...</li></ul>
+  </div>
+
+  <!-- Store Items -->
+  <div class="card">
+    <h2>Store</h2>
+    <div id="storeItems">Loading store...</div>
+  </div>
+
+  <!-- Checkout -->
+  <div class="card">
+    <h2>Checkout</h2>
+    <ul id="cartList"><li>No items in cart.</li></ul>
+    <p>Total: $<span id="cartTotal">0</span></p>
+    <button id="checkoutBtn">Place Order</button>
+  </div>
+
+  <!-- Messaging -->
+  <div class="card">
+    <h2>Messages</h2>
+    <ul id="messagesList"><li>No messages yet.</li></ul>
+    <textarea id="newMessage" placeholder="Type your message here..."></textarea>
+    <button id="sendMessageBtn">Send Message</button>
+  </div>
+</main>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+  import { getFirestore, doc, getDoc, updateDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDUAxWp7O_0mfGS82Yl3AS0qp7w_JNR5dY",
+    authDomain: "customer-portal-4322c.firebaseapp.com",
+    projectId: "customer-portal-4322c",
+    storageBucket: "customer-portal-4322c.appspot.com",
+    messagingSenderId: "934096556659",
+    appId: "1:934096556659:web:50f18d5e9e851d86131006"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  const userEmailSpan = document.getElementById("userEmail");
+  const createdAtSpan = document.getElementById("createdAt");
+  const userTierSpan = document.getElementById("userTier");
+  const ticketsList = document.getElementById("ticketsList");
+  const purchasesList = document.getElementById("purchasesList");
+  const dealsList = document.getElementById("dealsList");
+  const logoutBtn = document.getElementById("logoutBtn");
+  const storeItemsDiv = document.getElementById("storeItems");
+  const cartList = document.getElementById("cartList");
+  const cartTotalSpan = document.getElementById("cartTotal");
+  const checkoutBtn = document.getElementById("checkoutBtn");
+  const messagesList = document.getElementById("messagesList");
+  const newMessage = document.getElementById("newMessage");
+  const sendMessageBtn = document.getElementById("sendMessageBtn");
+
+  let cart = [];
+
+  function renderCart() {
+    if(cart.length === 0){
+      cartList.innerHTML = "<li>No items in cart.</li>";
+      cartTotalSpan.textContent = "0";
+      return;
+    }
+    cartList.innerHTML = cart.map(item => `<li>${item.name} - $${item.price}</li>`).join("");
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+    cartTotalSpan.textContent = total.toFixed(2);
+  }
+
+  function getDealsForTier(tier){
+    const deals = {
+      Basic:["10% off first repair","Free diagnostic on one device"],
+      Premium:["25% off upgrades","Priority tickets","Free extended warranty"],
+      Elite:["50% off new devices","24/7 VIP Support","Annual system health check"]
+    };
+    return deals[tier] || ["No special deals for this tier."];
+  }
+
+  // Logout
+  logoutBtn.addEventListener("click", () => {
+    signOut(auth).then(()=> window.location.href="portal.html").catch(err=>alert(err.message));
+  });
+
+  onAuthStateChanged(auth, async (user)=>{
+    if(!user){ window.location.href="portal.html"; return; }
+    userEmailSpan.textContent = user.email;
+    createdAtSpan.textContent = user.metadata.creationTime;
+
+    const userDocRef = doc(db,"users",user.uid);
+    const docSnap = await getDoc(userDocRef);
+    const data = docSnap.exists()? docSnap.data(): {};
+
+    const tier = data.tier || "Basic";
+    userTierSpan.textContent = tier;
+
+    ticketsList.innerHTML = (data.tickets && data.tickets.length)? data.tickets.map(t=>`<li>${t}</li>`).join("") : "<li>No tickets yet.</li>";
+    purchasesList.innerHTML = (data.purchases && data.purchases.length)? data.purchases.map(p=>`<li>${p.itemName} - $${p.itemPrice} - ${p.date.toDate? p.date.toDate().toLocaleString() : p.date}</li>`).join("") : "<li>No purchases yet.</li>";
+    dealsList.innerHTML = getDealsForTier(tier).map(d=>`<li>${d}</li>`).join("");
+
+    // Load messages
+    const messages = data.messages || [];
+    messagesList.innerHTML = messages.map(m=>`<li><strong>${m.from}:</strong> ${m.message}</li>`).join("");
+
+    // Load store items
+    const storeSnapshot = await getDocs(collection(db,"storeItems"));
+    storeSnapshot.forEach(docItem=>{
+      const item = docItem.data();
+      const itemDiv = document.createElement("div");
+      itemDiv.innerHTML = `<p><strong>${item.name}</strong> - $${item.price}</p><p>${item.description}</p><button>Add to Cart</button>`;
+      itemDiv.querySelector("button").onclick = ()=>{
+        cart.push({name:item.name,price:item.price});
+        renderCart();
+      };
+      storeItemsDiv.appendChild(itemDiv);
+    });
+  });
+
+  // Checkout
+  checkoutBtn.addEventListener("click", async ()=>{
+    if(cart.length===0) return alert("Cart empty!");
+    const user = auth.currentUser;
+    const userDocRef = doc(db,"users",user.uid);
+    const docSnap = await getDoc(userDocRef);
+    const data = docSnap.data() || {};
+    const purchases = data.purchases || [];
+    const now = new Date();
+    cart.forEach(item=>purchases.push({itemName:item.name, itemPrice:item.price, date:now}));
+    await updateDoc(userDocRef,{purchases});
+    alert("Order placed!");
+    cart=[];
+    renderCart();
+    purchasesList.innerHTML = purchases.map(p=>`<li>${p.itemName} - $${p.itemPrice} - ${p.date.toDate? p.date.toDate().toLocaleString() : p.date}</li>`).join("");
+  });
+
+  // Messaging
+  sendMessageBtn.addEventListener("click", async ()=>{
+    const user = auth.currentUser;
+    const messageText = newMessage.value.trim();
+    if(!messageText) return alert("Message cannot be empty!");
+    const userDocRef = doc(db,"users",user.uid);
+    const docSnap = await getDoc(userDocRef);
+    const data = docSnap.data() || {};
+    const messages = data.messages || [];
+    messages.push({message:messageText,from:"user",date:new Date()});
+    await updateDoc(userDocRef,{messages});
+    newMessage.value="";
+    messagesList.innerHTML = messages.map(m=>`<li><strong>${m.from}:</strong> ${m.message}</li>`).join("");
+  });
+
+  renderCart();
+</script>
 </body>
-
 </html>
