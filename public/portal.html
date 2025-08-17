@@ -23,7 +23,6 @@
       text-align: center;
       box-shadow: 0 4px 12px rgba(0,0,0,0.5);
       width: 350px;
-      position: relative;
     }
     h2 { margin-bottom: 1rem; color: #38bdf8; }
     input {
@@ -47,26 +46,12 @@
     }
     button:hover { background: #0ea5e9; }
     .switch-link { margin-top: 1rem; cursor: pointer; color: #00aaff; text-decoration: underline; }
-    .home-button {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      padding: 5px 10px;
-      font-size: 0.9rem;
-      background: #007bff;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    .home-button:hover { background: #0056b3; }
   </style>
 </head>
 <body>
 
   <!-- Sign Up -->
   <div class="card" id="signupCard">
-    <button class="home-button" onclick="window.location.href='home.html'">🏠 Home</button>
     <h2>Sign Up</h2>
     <input type="email" id="signupEmail" placeholder="Email" required />
     <input type="password" id="signupPassword" placeholder="Password" required />
@@ -76,7 +61,6 @@
 
   <!-- Login -->
   <div class="card" id="loginCard" style="display:none;">
-    <button class="home-button" onclick="window.location.href='home.html'">🏠 Home</button>
     <h2>Login</h2>
     <input type="email" id="loginEmail" placeholder="Email" required />
     <input type="password" id="loginPassword" placeholder="Password" required />
@@ -90,7 +74,7 @@
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
 
   <script>
-    // 🔹 Firebase config
+    // Firebase config
     const firebaseConfig = {
       apiKey: "AIzaSyDUAxWp7O_0mfGS82Yl3AS0qp7w_JNR5dY",
       authDomain: "customer-portal-4322c.firebaseapp.com",
@@ -118,20 +102,22 @@
     function signup() {
       const email = document.getElementById("signupEmail").value;
       const password = document.getElementById("signupPassword").value;
+      if (!email || !password) return alert("Email and password required.");
+
       auth.createUserWithEmailAndPassword(email, password)
         .then(userCredential => {
           const uid = userCredential.user.uid;
 
-          // Save user info to Firestore
+          // Save user info in Firestore
           db.collection("users").doc(uid).set({
             email: email,
             createdAt: new Date(),
-            purchases: [],
-            tickets: []
+            tickets: [],
+            purchases: []
           }).then(() => {
-            alert("Account created! Redirecting to Dashboard...");
+            // Redirect to dashboard
             window.location.href = "dashboard.html";
-          });
+          }).catch(err => alert(err.message));
         })
         .catch(error => alert(error.message));
     }
@@ -140,14 +126,17 @@
     function login() {
       const email = document.getElementById("loginEmail").value;
       const password = document.getElementById("loginPassword").value;
+      if (!email || !password) return alert("Email and password required.");
+
       auth.signInWithEmailAndPassword(email, password)
         .then(userCredential => {
+          // Redirect to dashboard
           window.location.href = "dashboard.html";
         })
         .catch(error => alert(error.message));
     }
 
-    // Auto redirect if already logged in
+    // Redirect if already logged in
     auth.onAuthStateChanged(user => {
       if (user) window.location.href = "dashboard.html";
     });
