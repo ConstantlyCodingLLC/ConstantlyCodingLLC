@@ -41,6 +41,14 @@ textarea, input[type=email], input[type=text], select { width:100%; padding:10px
 <p>Email: <span id="userEmail">Loading...</span></p>
 <p>Account Created: <span id="createdAt">Loading...</span></p>
 <p>Tier: <span id="userTier" class="highlight">Loading...</span></p>
+
+<!-- Tier Selector in User Info -->
+<label for="tierSelect">Choose Your Tier:</label>
+<select id="tierSelect">
+  <option value="1.05">Bronze (+5%)</option>
+  <option value="1.10">Silver (+10%)</option>
+  <option value="1.15">Gold (+15%)</option>
+</select>
 </div>
 
 <!-- Tickets -->
@@ -80,16 +88,6 @@ textarea, input[type=email], input[type=text], select { width:100%; padding:10px
 <div class="card">
 <h2>Request a Quote</h2>
 <form id="quoteForm">
-  <!-- Tier Selection -->
-  <div class="section">
-    <h3>Select Tier</h3>
-    <select id="tierSelect">
-      <option value="1.05">Bronze (+5%)</option>
-      <option value="1.10">Silver (+10%)</option>
-      <option value="1.15">Gold (+15%)</option>
-    </select>
-  </div>
-
   <!-- Services -->
   <div class="section">
     <h3>Select Services</h3>
@@ -146,7 +144,6 @@ const tierSelect = document.getElementById("tierSelect");
 const totalPriceSpan = document.getElementById("totalPrice");
 const serviceCheckboxes = document.querySelectorAll(".serviceItem");
 
-// Update total price function
 function updateTotal() {
   const multiplier = parseFloat(tierSelect.value);
   let total = 0;
@@ -179,7 +176,6 @@ onAuthStateChanged(auth, (user) => {
   });
 });
 
-// Event listeners
 tierSelect.addEventListener("change", updateTotal);
 serviceCheckboxes.forEach(cb => cb.addEventListener("change", updateTotal));
 
