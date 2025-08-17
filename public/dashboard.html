@@ -40,43 +40,31 @@ textarea, input[type=email], input[type=text] { width:100%; padding:10px; margin
 <h2>User Info</h2>
 <p>Email: <span id="userEmail">Loading...</span></p>
 <p>Account Created: <span id="createdAt">Loading...</span></p>
-<p>Tier: <span id="userTier" class="highlight">Basic</span></p>
+<p>Tier: <span id="userTier" class="highlight">Loading...</span></p>
 </div>
 
 <!-- Tickets -->
 <div class="card">
 <h2>Tickets</h2>
-<ul>
-  <li>Standard Ticket #1</li>
-  <li>Standard Ticket #2</li>
-</ul>
+<ul id="ticketsList"><li>Loading tickets...</li></ul>
 </div>
 
 <!-- Purchases -->
 <div class="card">
 <h2>Purchases</h2>
-<ul>
-  <li>Sample Purchase A - $100</li>
-  <li>Sample Purchase B - $200</li>
-</ul>
+<ul id="purchasesList"><li>Loading purchases...</li></ul>
 </div>
 
 <!-- Exclusive Device Deals -->
 <div class="card">
 <h2>Exclusive Device Deals</h2>
-<ul>
-  <li>Sample Deal 1</li>
-  <li>Sample Deal 2</li>
-</ul>
+<ul id="dealsList"><li>Loading deals...</li></ul>
 </div>
 
 <!-- Store Items -->
 <div class="card">
 <h2>Store</h2>
-<ul>
-  <li>Sample Item 1</li>
-  <li>Sample Item 2</li>
-</ul>
+<ul id="storeItems"><li>Loading store items...</li></ul>
 </div>
 
 <!-- Messaging -->
@@ -127,6 +115,7 @@ textarea, input[type=email], input[type=text] { width:100%; padding:10px; margin
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+import { getFirestore, doc, onSnapshot, collection, query } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDUAxWp7O_0mfGS82Yl3AS0qp7w_JNR5dY",
@@ -139,15 +128,62 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
 // Redirect if not logged in
-onAuthStateChanged(auth, user => {
-  if (!user) {
-    window.location.href = "portal.html";
-    return;
-  }
+onAuthStateChanged(auth, (user) => {
+  if (!user) return window.location.href = "portal.html";
+
   document.getElementById("userEmail").textContent = user.email;
   document.getElementById("createdAt").textContent = user.metadata.creationTime;
+
+  const userDocRef = doc(db, "users", user.uid);
+
+  // Real-time listener for user data
+  onSnapshot(userDocRef, (docSnap) => {
+    const data = docSnap.data() || {};
+
+    // Tickets
+    const ticketsList = document.getElementById("ticketsList");
+    ticketsList.innerHTML = data.tickets?.length
+      ? data.tickets.map(t => `<li>${t}</li>`).join("")
+      : "<li>No tickets yet</li>";
+
+    // Purchases
+    const purchasesList = document.getElementById("purchasesList");
+    purchasesList.innerHTML = data.purchases?.length
+      ? data.purchases.map(p => `<li>${p.itemName} - $${p.itemPrice} - ${p.date.toDate?.().toLocaleString()}</li>`).join("")
+      : "<li>No purchases yet</li>";
+
+    // Messages
+    const messagesList = document.getElementById("messagesList");
+    messagesList.innerHTML = data.messages?.length
+      ? data.messages.map(m => `<li><strong>${m.from}:</strong> ${m.message}</li>`).join("")
+      : "<li>No messages yet</li>";
+
+    // Tier & Deals
+    const userTierSpan = document.getElementById("userTier");
+    const dealsList = document.getElementById("dealsList");
+    const tier = data.tier || "Basic";
+    userTierSpan.textContent = tier;
+    const deals = {
+      Basic: ["10% off first repair", "Free diagnostic on one device"],
+      Premium: ["25% off upgrades", "Priority tickets", "Free extended warranty"],
+      Elite: ["50% off new devices", "24/7 VIP Support", "Annual system health check"]
+    };
+    dealsList.innerHTML = (deals[tier] || ["No deals available"]).map(d => `<li>${d}</li>`).join("");
+  });
+
+  // Store items real-time
+  const storeQuery = query(collection(db, "storeItems"));
+  onSnapshot(storeQuery, (querySnap) => {
+    const storeItemsDiv = document.getElementById("storeItems");
+    storeItemsDiv.innerHTML = "";
+    querySnap.forEach(docItem => {
+      const item = docItem.data();
+      storeItemsDiv.innerHTML += `<li>${item.name} - $${item.price} - ${item.description}</li>`;
+    });
+  });
 });
 
 // Logout
@@ -160,7 +196,7 @@ document.getElementById("logoutBtn").addEventListener("click", () => {
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
-emailjs.init("E9OsYJGehSyOtP6bv"); // Your public key
+emailjs.init("E9OsYJGehSyOtP6bv");
 
 // Calculate total price
 const totalPriceSpan = document.getElementById("totalPrice");
@@ -177,18 +213,16 @@ document.querySelectorAll('#quoteForm input[type="checkbox"]').forEach(cb=>{
 // Quote form submission
 document.getElementById("quoteForm").addEventListener("submit", function(e){
   e.preventDefault();
-  const form = this;
-  emailjs.sendForm("service_eh25yzg", "template_r8c8xqe", form)
-    .then(()=>{alert("Quote sent to constantlycodingllc@gmail.com!"); form.reset(); totalPriceSpan.textContent="0";})
+  emailjs.sendForm("service_eh25yzg", "template_r8c8xqe", this)
+    .then(()=>{alert("Quote sent to constantlycodingllc@gmail.com!"); this.reset(); totalPriceSpan.textContent="0";})
     .catch(err=>alert("Error sending quote: "+err));
 });
 
 // Message form submission
 document.getElementById("messageForm").addEventListener("submit", function(e){
   e.preventDefault();
-  const form = this;
-  emailjs.sendForm("service_eh25yzg", "template_r8c8xqe", form)
-    .then(()=>{alert("Message sent to constantlycodingllc@gmail.com!"); form.reset();})
+  emailjs.sendForm("service_eh25yzg", "template_r8c8xqe", this)
+    .then(()=>{alert("Message sent to constantlycodingllc@gmail.com!"); this.reset();})
     .catch(err=>alert("Error sending message: "+err));
 });
 </script>
