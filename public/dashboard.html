@@ -29,6 +29,7 @@
       font-weight: bold;
       cursor: pointer;
       color: #0d1117;
+      margin-left: 8px;
     }
     header button:hover { background: #0ea5e9; }
     main {
@@ -46,6 +47,7 @@
     h2 { color: #38bdf8; margin-bottom: 10px; }
     ul { list-style: none; padding: 0; }
     li { padding: 5px 0; border-bottom: 1px solid #0d1117; }
+    .highlight { color: #22c55e; font-weight: bold; }
   </style>
 </head>
 <body>
@@ -54,7 +56,7 @@
   <h1>Dashboard</h1>
   <div>
     <button onclick="window.location.href='home.html'">🏠 Home</button>
-    <button onclick="logout()">Logout</button>
+    <button id="logoutBtn">Logout</button>
   </div>
 </header>
 
@@ -63,28 +65,38 @@
     <h2>User Info</h2>
     <p>Email: <span id="userEmail">Loading...</span></p>
     <p>Account Created: <span id="createdAt">Loading...</span></p>
+    <p>Tier: <span id="userTier" class="highlight">Loading...</span></p>
   </div>
 
   <div class="card">
     <h2>Tickets</h2>
-    <ul id="ticketsList">
-      <li>Loading tickets...</li>
-    </ul>
+    <ul id="ticketsList"><li>Loading tickets...</li></ul>
   </div>
 
   <div class="card">
     <h2>Purchases</h2>
-    <ul id="purchasesList">
-      <li>Loading purchases...</li>
-    </ul>
+    <ul id="purchasesList"><li>Loading purchases...</li></ul>
+  </div>
+
+  <div class="card">
+    <h2>Exclusive Device Deals</h2>
+    <ul id="dealsList"><li>Loading deals...</li></ul>
   </div>
 </main>
 
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+  import { 
+    getAuth, 
+    onAuthStateChanged, 
+    signOut 
+  } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+  import { 
+    getFirestore, 
+    doc, 
+    getDoc 
+  } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
-<script>
   // Firebase config
   const firebaseConfig = {
     apiKey: "AIzaSyDUAxWp7O_0mfGS82Yl3AS0qp7w_JNR5dY",
@@ -95,47 +107,89 @@
     appId: "1:934096556659:web:50f18d5e9e851d86131006"
   };
 
-  const app = firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
-  const db = firebase.firestore();
+  // Init
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
 
-  // Get elements
+  // Elements
   const userEmailSpan = document.getElementById("userEmail");
   const createdAtSpan = document.getElementById("createdAt");
+  const userTierSpan = document.getElementById("userTier");
   const ticketsList = document.getElementById("ticketsList");
   const purchasesList = document.getElementById("purchasesList");
+  const dealsList = document.getElementById("dealsList");
+  const logoutBtn = document.getElementById("logoutBtn");
 
-  // Logout function
-  function logout() {
-    auth.signOut().then(() => {
+  // Logout
+  logoutBtn.addEventListener("click", () => {
+    signOut(auth).then(() => {
       window.location.href = "portal.html";
+    }).catch(err => {
+      alert("Logout error: " + err.message);
     });
+  });
+
+  // Tier-based deals
+  function getDealsForTier(tier) {
+    const deals = {
+      Basic: [
+        "10% off first repair service",
+        "Free diagnostic on one device"
+      ],
+      Premium: [
+        "25% off all device upgrades",
+        "Priority ticket handling",
+        "Free extended warranty (3 months)"
+      ],
+      Elite: [
+        "50% off new devices",
+        "24/7 VIP Support",
+        "Annual system health check for free"
+      ]
+    };
+    return deals[tier] || ["No special deals for this tier yet."];
   }
 
-  // Load user data
-  auth.onAuthStateChanged(user => {
+  // Auth state
+  onAuthStateChanged(auth, async (user) => {
     if (!user) {
-      // If not logged in, redirect to portal
       window.location.href = "portal.html";
+      return;
+    }
+
+    userEmailSpan.textContent = user.email;
+    createdAtSpan.textContent = user.metadata.creationTime;
+
+    const uid = user.uid;
+    const docRef = doc(db, "users", uid);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+
+      // Tier
+      const tier = data.tier || "Basic";
+      userTierSpan.textContent = tier;
+
+      // Tickets
+      ticketsList.innerHTML = (data.tickets && data.tickets.length)
+        ? data.tickets.map(t => `<li>${t}</li>`).join("")
+        : "<li>No tickets yet.</li>";
+
+      // Purchases
+      purchasesList.innerHTML = (data.purchases && data.purchases.length)
+        ? data.purchases.map(p => `<li>${p}</li>`).join("")
+        : "<li>No purchases yet.</li>";
+
+      // Deals
+      const deals = getDealsForTier(tier);
+      dealsList.innerHTML = deals.map(d => `<li>${d}</li>`).join("");
     } else {
-      const uid = user.uid;
-      db.collection("users").doc(uid).get().then(doc => {
-        if (doc.exists) {
-          const data = doc.data();
-          userEmailSpan.textContent = data.email;
-          createdAtSpan.textContent = data.createdAt.toDate().toLocaleString();
-
-          // Populate tickets
-          ticketsList.innerHTML = data.tickets.length
-            ? data.tickets.map(t => `<li>${t}</li>`).join('')
-            : '<li>No tickets yet.</li>';
-
-          // Populate purchases
-          purchasesList.innerHTML = data.purchases.length
-            ? data.purchases.map(p => `<li>${p}</li>`).join('')
-            : '<li>No purchases yet.</li>';
-        }
-      });
+      userTierSpan.textContent = "Basic";
+      ticketsList.innerHTML = "<li>No tickets yet.</li>";
+      purchasesList.innerHTML = "<li>No purchases yet.</li>";
+      dealsList.innerHTML = "<li>No special deals for this tier yet.</li>";
     }
   });
 </script>
