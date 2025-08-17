@@ -15,27 +15,7 @@
       align-items: center;
       height: 100vh;
       margin: 0;
-      position: relative;
     }
-
-    /* Top-left Home button */
-    .home-button {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      background: #007bff;
-      color: white;
-      border: none;
-      padding: 0.6rem 1rem;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      z-index: 1000;
-    }
-    .home-button:hover {
-      background: #0056b3;
-    }
-
     .card {
       background: #161b22;
       padding: 2rem;
@@ -55,7 +35,7 @@
       border-radius: 8px;
       outline: none;
     }
-    button.portal-btn {
+    button {
       background: #007bff;
       color: white;
       border: none;
@@ -63,11 +43,15 @@
       margin-top: 1rem;
       border-radius: 8px;
       cursor: pointer;
-      width: auto;
+      width: 100%;
       font-weight: bold;
     }
-    button.portal-btn:hover {
+    button:hover {
       background: #0056b3;
+    }
+    .portal button {
+      width: auto;
+      margin: 0.5rem;
     }
     .switch-link {
       margin-top: 1rem;
@@ -75,11 +59,26 @@
       color: #00aaff;
       text-decoration: underline;
     }
+    .home-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: #38bdf8;
+      color: #0d1117;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .home-button:hover {
+      background: #0ea5e9;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Fixed Home button -->
+  <!-- Home Button -->
   <button class="home-button" onclick="window.location.href='home.html'">🏠 Home</button>
 
   <!-- Sign Up Card -->
@@ -104,23 +103,26 @@
   <div class="card portal" id="portal" style="display:none;">
     <h2>Welcome, <span id="userEmail"></span></h2>
     <p>You are now logged in to the CONSTANTLY CODING LLC client portal.</p>
-    <button class="portal-btn" onclick="logout()">Logout</button>
+    <button onclick="window.location.href='home.html'">🏠 Home</button>
+    <button onclick="logout()">Logout</button>
   </div>
 
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
   <script>
-    // Replace with your Firebase project config
     const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_PROJECT_ID.appspot.com",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId: "YOUR_APP_ID"
+      apiKey: "AIzaSyDUAxWp7O_0mfGS82Yl3AS0qp7w_JNR5dY",
+      authDomain: "customer-portal-4322c.firebaseapp.com",
+      projectId: "customer-portal-4322c",
+      storageBucket: "customer-portal-4322c.firebasestorage.app",
+      messagingSenderId: "934096556659",
+      appId: "1:934096556659:web:50f18d5e9e851d86131006",
+      measurementId: "G-JTBMDC9MXP"
     };
-    firebase.initializeApp(firebaseConfig);
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
 
     function showLogin() {
@@ -136,7 +138,7 @@
       const email = document.getElementById("signupEmail").value;
       const password = document.getElementById("signupPassword").value;
       auth.createUserWithEmailAndPassword(email, password)
-        .then((userCredential) => {
+        .then(userCredential => {
           alert("Account created!");
         })
         .catch(error => alert(error.message));
@@ -146,7 +148,7 @@
       const email = document.getElementById("loginEmail").value;
       const password = document.getElementById("loginPassword").value;
       auth.signInWithEmailAndPassword(email, password)
-        .then((userCredential) => {
+        .then(userCredential => {
           document.getElementById("userEmail").textContent = userCredential.user.email;
           document.getElementById("loginCard").style.display = "none";
           document.getElementById("signupCard").style.display = "none";
