@@ -92,5 +92,60 @@
     if (user) window.location.href = "dashboard.html";
   });
 </script>
+<script>
+  // Your Google Sheets Web App URL
+  const sheetWebAppURL = "https://docs.google.com/spreadsheets/d/1uvSXRWmiE9CKzSpsuAuTqQ7ekSkIWkdOBWodUz--Th8/edit?gid=0#gid=0";
+
+  // Function to send data to Google Sheets
+  function sendToSheet(email, name = "", purchase = "", purchaseType = "") {
+    fetch(sheetWebAppURL, {
+      method: "POST",
+      body: JSON.stringify({
+        email: email,
+        name: name,
+        purchase: purchase,
+        purchaseType: purchaseType
+      })
+    })
+    .then(res => res.json())
+    .then(res => console.log("Sheet response:", res))
+    .catch(err => console.error("Sheet error:", err));
+  }
+
+  // Modify signup function
+  function signup() {
+    const email = document.getElementById("signupEmail").value;
+    const password = document.getElementById("signupPassword").value;
+    auth.createUserWithEmailAndPassword(email, password)
+      .then(userCredential => {
+        const uid = userCredential.user.uid;
+        db.collection("users").doc(uid).set({
+          email: email,
+          createdAt: new Date()
+        });
+
+        // Send signup data to Google Sheet
+        sendToSheet(email);
+
+        window.location.href = "dashboard.html";
+      })
+      .catch(error => alert(error.message));
+  }
+
+  // Modify login function if you want to track logins too
+  function login() {
+    const email = document.getElementById("loginEmail").value;
+    const password = document.getElementById("loginPassword").value;
+    auth.signInWithEmailAndPassword(email, password)
+      .then(userCredential => {
+        // Optional: Track login in sheet
+        sendToSheet(email, ""); // You can pass name if you collect it on login
+
+        window.location.href = "dashboard.html";
+      })
+      .catch(error => alert(error.message));
+  }
+</script>
+
 </body>
 </html>
