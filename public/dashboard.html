@@ -17,7 +17,7 @@ h2 { color:#38bdf8; margin-bottom:10px; }
 ul { list-style:none; padding:0; }
 li { padding:5px 0; border-bottom:1px solid #0d1117; }
 .highlight { color:#22c55e; font-weight:bold; }
-textarea, input[type=email], input[type=text] { width:100%; padding:10px; margin-top:10px; border-radius:6px; border:none; outline:none;}
+textarea, input[type=email], input[type=text], select { width:100%; padding:10px; margin-top:10px; border-radius:6px; border:none; outline:none;}
 #quoteForm label { display:block; margin-bottom:5px;}
 #quoteForm button, #sendMessageBtn { margin-top:10px; width:100%; padding:10px; border:none; border-radius:6px; background:#38bdf8; color:#0d1117; font-weight:bold; cursor:pointer;}
 #quoteForm button:hover, #sendMessageBtn:hover { background:#0ea5e9;}
@@ -80,26 +80,38 @@ textarea, input[type=email], input[type=text] { width:100%; padding:10px; margin
 <div class="card">
 <h2>Request a Quote</h2>
 <form id="quoteForm">
+  <!-- Tier Selection -->
+  <div class="section">
+    <h3>Select Tier</h3>
+    <select id="tierSelect">
+      <option value="1.05">Bronze (+5%)</option>
+      <option value="1.10">Silver (+10%)</option>
+      <option value="1.15">Gold (+15%)</option>
+    </select>
+  </div>
+
+  <!-- Services -->
   <div class="section">
     <h3>Select Services</h3>
-    <label><input type="checkbox" name="services" value="150"> Starter Website ($150)</label>
-    <label><input type="checkbox" name="services" value="400"> 5-Page Website ($400)</label>
-    <label><input type="checkbox" name="services" value="600"> Web/App Store ($600)</label>
-    <label><input type="checkbox" name="services" value="100"> Home Office Setup ($100)</label>
-    <label><input type="checkbox" name="services" value="250"> Small Office Network ($250)</label>
-    <label><input type="checkbox" name="services" value="400"> Secure Office Network ($400)</label>
-    <label><input type="checkbox" name="services" value="100"> Basic Cabling Drop ($100)</label>
-    <label><input type="checkbox" name="services" value="300"> Office Wiring ($300)</label>
-    <label><input type="checkbox" name="services" value="500"> Full Cabling Package ($500)</label>
-    <label><input type="checkbox" name="services" value="150"> Basic Ticketing System ($150)</label>
-    <label><input type="checkbox" name="services" value="300"> Internal Ticket Suite ($300)</label>
-    <label><input type="checkbox" name="services" value="500"> Advanced Ticketing + Portal ($500)</label>
-    <label><input type="checkbox" name="services" value="150"> Inventory Tracker Lite ($150)</label>
-    <label><input type="checkbox" name="services" value="400"> Asset Suite ($400)</label>
-    <label><input type="checkbox" name="services" value="600"> Smart Management Dashboard ($600)</label>
+    <label><input type="checkbox" class="serviceItem" data-base="150"> Starter Website ($150)</label>
+    <label><input type="checkbox" class="serviceItem" data-base="400"> 5-Page Website ($400)</label>
+    <label><input type="checkbox" class="serviceItem" data-base="600"> Web/App Store ($600)</label>
+    <label><input type="checkbox" class="serviceItem" data-base="100"> Home Office Setup ($100)</label>
+    <label><input type="checkbox" class="serviceItem" data-base="250"> Small Office Network ($250)</label>
+    <label><input type="checkbox" class="serviceItem" data-base="400"> Secure Office Network ($400)</label>
+    <label><input type="checkbox" class="serviceItem" data-base="100"> Basic Cabling Drop ($100)</label>
+    <label><input type="checkbox" class="serviceItem" data-base="300"> Office Wiring ($300)</label>
+    <label><input type="checkbox" class="serviceItem" data-base="500"> Full Cabling Package ($500)</label>
+    <label><input type="checkbox" class="serviceItem" data-base="150"> Basic Ticketing System ($150)</label>
+    <label><input type="checkbox" class="serviceItem" data-base="300"> Internal Ticket Suite ($300)</label>
+    <label><input type="checkbox" class="serviceItem" data-base="500"> Advanced Ticketing + Portal ($500)</label>
+    <label><input type="checkbox" class="serviceItem" data-base="150"> Inventory Tracker Lite ($150)</label>
+    <label><input type="checkbox" class="serviceItem" data-base="400"> Asset Suite ($400)</label>
+    <label><input type="checkbox" class="serviceItem" data-base="600"> Smart Management Dashboard ($600)</label>
     <div class="total">Total: $<span id="totalPrice">0</span></div>
   </div>
 
+  <!-- User Info -->
   <div class="section">
     <h3>Your Information</h3>
     <label>Full Name:<input type="text" name="from_name" required /></label>
@@ -130,67 +142,49 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Redirect if not logged in
+const tierSelect = document.getElementById("tierSelect");
+const totalPriceSpan = document.getElementById("totalPrice");
+const serviceCheckboxes = document.querySelectorAll(".serviceItem");
+
+// Update total price function
+function updateTotal() {
+  const multiplier = parseFloat(tierSelect.value);
+  let total = 0;
+  serviceCheckboxes.forEach(cb => { if(cb.checked) total += Math.round(parseFloat(cb.dataset.base) * multiplier); });
+  totalPriceSpan.textContent = total;
+}
+
+// Real-time Firebase data
 onAuthStateChanged(auth, (user) => {
   if (!user) return window.location.href = "portal.html";
-
   document.getElementById("userEmail").textContent = user.email;
   document.getElementById("createdAt").textContent = user.metadata.creationTime;
 
   const userDocRef = doc(db, "users", user.uid);
 
-  // Real-time listener for user data
   onSnapshot(userDocRef, (docSnap) => {
     const data = docSnap.data() || {};
+    document.getElementById("userTier").textContent = data.tier || "Basic";
 
-    // Tickets
-    const ticketsList = document.getElementById("ticketsList");
-    ticketsList.innerHTML = data.tickets?.length
-      ? data.tickets.map(t => `<li>${t}</li>`).join("")
-      : "<li>No tickets yet</li>";
-
-    // Purchases
-    const purchasesList = document.getElementById("purchasesList");
-    purchasesList.innerHTML = data.purchases?.length
-      ? data.purchases.map(p => `<li>${p.itemName} - $${p.itemPrice} - ${p.date.toDate?.().toLocaleString()}</li>`).join("")
-      : "<li>No purchases yet</li>";
-
-    // Messages
-    const messagesList = document.getElementById("messagesList");
-    messagesList.innerHTML = data.messages?.length
-      ? data.messages.map(m => `<li><strong>${m.from}:</strong> ${m.message}</li>`).join("")
-      : "<li>No messages yet</li>";
-
-    // Tier & Deals
-    const userTierSpan = document.getElementById("userTier");
-    const dealsList = document.getElementById("dealsList");
-    const tier = data.tier || "Basic";
-    userTierSpan.textContent = tier;
-    const deals = {
-      Basic: ["10% off first repair", "Free diagnostic on one device"],
-      Premium: ["25% off upgrades", "Priority tickets", "Free extended warranty"],
-      Elite: ["50% off new devices", "24/7 VIP Support", "Annual system health check"]
-    };
-    dealsList.innerHTML = (deals[tier] || ["No deals available"]).map(d => `<li>${d}</li>`).join("");
-  });
-
-  // Store items real-time
-  const storeQuery = query(collection(db, "storeItems"));
-  onSnapshot(storeQuery, (querySnap) => {
-    const storeItemsDiv = document.getElementById("storeItems");
-    storeItemsDiv.innerHTML = "";
-    querySnap.forEach(docItem => {
-      const item = docItem.data();
-      storeItemsDiv.innerHTML += `<li>${item.name} - $${item.price} - ${item.description}</li>`;
-    });
+    // Match tier to selector
+    if(data.tier){
+      switch(data.tier.toLowerCase()){
+        case "bronze": tierSelect.value = "1.05"; break;
+        case "silver": tierSelect.value = "1.10"; break;
+        case "gold": tierSelect.value = "1.15"; break;
+        default: tierSelect.value = "1.05";
+      }
+    }
+    updateTotal();
   });
 });
 
-// Logout
+// Event listeners
+tierSelect.addEventListener("change", updateTotal);
+serviceCheckboxes.forEach(cb => cb.addEventListener("change", updateTotal));
+
 document.getElementById("logoutBtn").addEventListener("click", () => {
-  signOut(auth)
-    .then(() => window.location.href="portal.html")
-    .catch(err => alert("Logout error: "+err.message));
+  signOut(auth).then(()=>window.location.href="portal.html").catch(err=>alert("Logout error: "+err.message));
 });
 </script>
 
@@ -198,19 +192,6 @@ document.getElementById("logoutBtn").addEventListener("click", () => {
 <script>
 emailjs.init("E9OsYJGehSyOtP6bv");
 
-// Calculate total price
-const totalPriceSpan = document.getElementById("totalPrice");
-document.querySelectorAll('#quoteForm input[type="checkbox"]').forEach(cb=>{
-  cb.addEventListener("change",()=>{
-    let total = 0;
-    document.querySelectorAll('#quoteForm input[type="checkbox"]:checked').forEach(c=>{
-      total += parseInt(c.value);
-    });
-    totalPriceSpan.textContent = total;
-  });
-});
-
-// Quote form submission
 document.getElementById("quoteForm").addEventListener("submit", function(e){
   e.preventDefault();
   emailjs.sendForm("service_eh25yzg", "template_r8c8xqe", this)
@@ -218,7 +199,6 @@ document.getElementById("quoteForm").addEventListener("submit", function(e){
     .catch(err=>alert("Error sending quote: "+err));
 });
 
-// Message form submission
 document.getElementById("messageForm").addEventListener("submit", function(e){
   e.preventDefault();
   emailjs.sendForm("service_eh25yzg", "template_r8c8xqe", this)
