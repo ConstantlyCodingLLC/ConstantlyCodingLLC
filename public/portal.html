@@ -2,150 +2,135 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Client Portal | CONSTANTLY CODING LLC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Work - Constantly Coding LLC</title>
+  <link rel="icon" href="/vector_ready_logo_2_inPixio.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: Arial; background:#0d1117; color:white; display:flex; justify-content:center; align-items:center; height:100vh; margin:0;}
-    .card { background:#161b22; padding:2rem; border-radius:12px; text-align:center; width:350px;}
-    input { width:100%; padding:0.7rem; margin:0.5rem 0; border:none; border-radius:8px;}
-    button { width:100%; padding:0.7rem; border:none; border-radius:8px; margin-top:1rem; background:#38bdf8; color:#0d1117; font-weight:bold; cursor:pointer;}
-    button:hover { background:#0ea5e9;}
-    .switch-link { margin-top:1rem; cursor:pointer; color:#00aaff; text-decoration:underline;}
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #0b1120;
+      color: #e2e8f0;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #1e293b;
+      padding: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: #e2e8f0;
+      text-decoration: none;
+      margin: 10px 15px;
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #38bdf8;
+    }
+
+    section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.6rem;
+      color: #38bdf8;
+      margin-bottom: 20px;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .project {
+      background-color: #1e293b;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .project:hover {
+      transform: scale(1.03);
+    }
+
+    .project img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .project h3 {
+      color: #38bdf8;
+      margin-bottom: 10px;
+    }
+
+    .project p {
+      font-size: 1rem;
+      color: #cbd5e1;
+    }
+
+    .project a {
+      display: inline-block;
+      margin-top: 10px;
+      color: #38bdf8;
+      text-decoration: underline;
+    }
+
+    footer {
+      background-color: #1e2a47;
+      text-align: center;
+      padding: 20px;
+      font-weight: 600;
+      margin-top: 40px;
+    }
   </style>
 </head>
 <body>
 
-<div class="card" id="signupCard">
-  <h2>Sign Up</h2>
-  <input type="email" id="signupEmail" placeholder="Email" />
-  <input type="password" id="signupPassword" placeholder="Password" />
-  <button onclick="signup()">Sign Up</button>
-  <div class="switch-link" onclick="showLogin()">Already have an account? Sign In</div>
-</div>
+  <!-- Navigation -->
+  <nav>
+    <a href="home.html">Home</a>
+    <a href="contact-us.html">Contact Us</a>
+    <a href="store.html">Store</a>
+    <a href="portfolio.html">Our Work</a>
+  </nav>
 
-<div class="card" id="loginCard" style="display:none;">
-  <h2>Login</h2>
-  <input type="email" id="loginEmail" placeholder="Email" />
-  <input type="password" id="loginPassword" placeholder="Password" />
-  <button onclick="login()">Login</button>
-  <div class="switch-link" onclick="showSignup()">Don’t have an account? Sign Up</div>
-</div>
+  <!-- Portfolio Section -->
+  <section>
+    <h1>Our Work</h1>
+    <div class="projects">
+      <div class="project">
+        <h3>East North Enterprise Website</h3>
+        <p>A professional, responsive business website for East North Enterprise LLC — optimized for performance and clarity.</p>
+        <a href="https://east-north-enterprise-llc.vercel.app" target="_blank">View Project</a>
+      </div>
 
-<!-- Firebase v8 SDK -->
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+      <div class="project">
+        <h3>BOSJ Enterprise Website</h3>
+        <p>Custom site for BOSJ Enterprise showcasing modern design with powerful business tools and strong branding.</p>
+        <a href="https://bosj-enterprise.vercel.app/" target="_blank">View Project</a>
+      </div>
+    </div>
+  </section>
 
-<script>
-  // Your Firebase config
-  const firebaseConfig = {
-    apiKey: "AIzaSyDUAxWp7O_0mfGS82Yl3AS0qp7w_JNR5dY",
-    authDomain: "customer-portal-4322c.firebaseapp.com",
-    projectId: "customer-portal-4322c",
-    storageBucket: "customer-portal-4322c.appspot.com",
-    messagingSenderId: "934096556659",
-    appId: "1:934096556659:web:50f18d5e9e851d86131006"
-  };
-
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
-  const db = firebase.firestore();
-
-  function showLogin() {
-    document.getElementById("signupCard").style.display="none";
-    document.getElementById("loginCard").style.display="block";
-  }
-
-  function showSignup() {
-    document.getElementById("loginCard").style.display="none";
-    document.getElementById("signupCard").style.display="block";
-  }
-
-  function signup() {
-    const email = document.getElementById("signupEmail").value;
-    const password = document.getElementById("signupPassword").value;
-    auth.createUserWithEmailAndPassword(email, password)
-      .then(userCredential => {
-        const uid = userCredential.user.uid;
-        db.collection("users").doc(uid).set({
-          email: email,
-          createdAt: new Date()
-        });
-        window.location.href = "dashboard.html";
-      })
-      .catch(error => alert(error.message));
-  }
-
-  function login() {
-    const email = document.getElementById("loginEmail").value;
-    const password = document.getElementById("loginPassword").value;
-    auth.signInWithEmailAndPassword(email, password)
-      .then(userCredential => {
-        window.location.href = "dashboard.html";
-      })
-      .catch(error => alert(error.message));
-  }
-
-  // Redirect if already logged in
-  auth.onAuthStateChanged(user => {
-    if (user) window.location.href = "dashboard.html";
-  });
-</script>
-<script>
-  // Your Google Sheets Web App URL
-  const sheetWebAppURL = "https://docs.google.com/spreadsheets/d/1uvSXRWmiE9CKzSpsuAuTqQ7ekSkIWkdOBWodUz--Th8/edit?usp=sharing";
-
-  // Function to send data to Google Sheets
-  function sendToSheet(email, name = "", purchase = "", purchaseType = "") {
-    fetch(sheetWebAppURL, {
-      method: "POST",
-      body: JSON.stringify({
-        email: email,
-        name: name,
-        purchase: purchase,
-        purchaseType: purchaseType
-      })
-    })
-    .then(res => res.json())
-    .then(res => console.log("Sheet response:", res))
-    .catch(err => console.error("Sheet error:", err));
-  }
-
-  // Modify signup function
-  function signup() {
-    const email = document.getElementById("signupEmail").value;
-    const password = document.getElementById("signupPassword").value;
-    auth.createUserWithEmailAndPassword(email, password)
-      .then(userCredential => {
-        const uid = userCredential.user.uid;
-        db.collection("users").doc(uid).set({
-          email: email,
-          createdAt: new Date()
-        });
-
-        // Send signup data to Google Sheet
-        sendToSheet(email);
-
-        window.location.href = "dashboard.html";
-      })
-      .catch(error => alert(error.message));
-  }
-
-  // Modify login function if you want to track logins too
-  function login() {
-    const email = document.getElementById("loginEmail").value;
-    const password = document.getElementById("loginPassword").value;
-    auth.signInWithEmailAndPassword(email, password)
-      .then(userCredential => {
-        // Optional: Track login in sheet
-        sendToSheet(email, ""); // You can pass name if you collect it on login
-
-        window.location.href = "dashboard.html";
-      })
-      .catch(error => alert(error.message));
-  }
-</script>
+  <footer>
+    <p>&copy; 2025 Constantly Coding LLC. All Rights Reserved.</p>
+  </footer>
 
 </body>
 </html>
