@@ -9,170 +9,100 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-
  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
       font-family: 'Roboto', sans-serif;
-      color: white;
-      background-color: #0b1120;
-      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+      background-color: #0f172a;
+      color: #f1f5f9;
       line-height: 1.6;
     }
-
-    /* Background Logo */
-    .background-logo {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: -1;
-      opacity: 0.1;
-      pointer-events: none;
-      max-width: 100%;
-      max-height: 100%;
-      width: 80%;
-      height: auto;
-      animation: fadeInBackground 10s infinite;
+    .store-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px 15px;
     }
-
-    @keyframes fadeInBackground {
-      0% {
-        opacity: 0.05;
-      }
-
-      50% {
-        opacity: 0.15;
-      }
-
-      100% {
-        opacity: 0.05;
-      }
-    }
-
-    header {
-      padding: 20px;
+    h1, h2 {
       text-align: center;
-      background-color: #0b1120;
-      animation: fadeIn 2s ease-in;
+      margin-bottom: 10px;
     }
-
-    nav a {
-      margin: 0 15px;
+    h1 {
+      font-size: 2rem;
       color: #38bdf8;
-      text-decoration: none;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 500;
     }
-
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-    section {
-      max-width: 800px;
-      margin: 80px auto 40px;
-      padding: 20px;
-      background-color: rgba(0, 0, 0, 0.5);
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-      animation: fadeIn 1.5s ease-in;
-    }
-
-    section h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 2.5rem;
-      color: #38bdf8;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    section p {
-      font-size: 1.1rem;
-      color: #e2e8f0;
-      margin-bottom: 20px;
-      text-align: justify;
-    }
-
-    section h2 {
-      font-size: 1.5rem;
-      color: #38bdf8;
-      margin-top: 20px;
-    }
-
-    section ul {
-      list-style-type: disc;
-      margin-left: 20px;
-      color: #e2e8f0;
-    }
-
-    footer {
-      background-color: #1e2a47;
-      color: #e2e8f0;
-      text-align: center;
-      padding: 20px;
-      font-weight: 600;
-    }
-
-    /* CTA Button */
-    .cta-button {
-      display: inline-block;
-      padding: 14px 28px;
-      background-color: #38bdf8;
-      color: #0b1120;
-      font-weight: 700;
-      font-family: 'Orbitron', sans-serif;
-      text-decoration: none;
-      border-radius: 8px;
+    h2 {
       font-size: 1.2rem;
-      transition: background-color 0.3s ease;
-      margin-top: 30px;
+      color: #94a3b8;
+      margin-bottom: 20px;
     }
-
+    p.intro {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    .cta-button {
+      display: block;
+      text-align: center;
+      background: #38bdf8;
+      color: #0f172a;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      max-width: 200px;
+      margin: 15px auto 40px;
+      transition: 0.3s ease;
+    }
     .cta-button:hover {
-      background-color: #0ea5e9;
+      background: #22d3ee;
     }
-
-    @keyframes fadeIn {
-      0% {
-        opacity: 0;
-      }
-
-      100% {
-        opacity: 1;
-      }
+    .bundle-section {
+      margin: 40px 0;
     }
-
-    @media (max-width: 768px) {
-      section h1 {
-        font-size: 2rem;
-      }
-
-      section p,
-      section ul {
-        font-size: 1rem;
-      }
+    .bundle-section h3 {
+      font-size: 1.5rem;
+      border-left: 4px solid #38bdf8;
+      padding-left: 10px;
+      margin-bottom: 20px;
     }
-
-    @media (max-width: 480px) {
-      section h1 {
-        font-size: 1.6rem;
-      }
-
-      section p,
-      section ul {
-        font-size: 0.95rem;
-      }
-
-      footer {
-        font-size: 0.85rem;
-        padding: 16px;
-      }
+    .bundle-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .bundle {
+      background: #1e293b;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease, border 0.3s ease;
+      border: 2px solid transparent;
+    }
+    .bundle:hover {
+      transform: translateY(-5px);
+      border-color: #38bdf8;
+    }
+    .bundle h4 {
+      color: #38bdf8;
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+    .price {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #facc15;
+      margin-bottom: 10px;
+    }
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    ul li {
+      margin-bottom: 6px;
+    }
+    em {
+      font-size: 0.9rem;
+      color: #94a3b8;
     }
   </style>
 </head>
@@ -210,3 +140,4 @@
 </body>
 
 </html>
+
