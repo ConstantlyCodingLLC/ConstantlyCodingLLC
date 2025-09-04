@@ -1,0 +1,96 @@
+ <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #0f172a;
+      color: #f1f5f9;
+      line-height: 1.6;
+    }
+    .store-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px 15px;
+    }
+    h1, h2 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    h1 {
+      font-size: 2rem;
+      color: #38bdf8;
+    }
+    h2 {
+      font-size: 1.2rem;
+      color: #94a3b8;
+      margin-bottom: 20px;
+    }
+    p.intro {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    .cta-button {
+      display: block;
+      text-align: center;
+      background: #38bdf8;
+      color: #0f172a;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      max-width: 200px;
+      margin: 15px auto 40px;
+      transition: 0.3s ease;
+    }
+    .cta-button:hover {
+      background: #22d3ee;
+    }
+    .bundle-section {
+      margin: 40px 0;
+    }
+    .bundle-section h3 {
+      font-size: 1.5rem;
+      border-left: 4px solid #38bdf8;
+      padding-left: 10px;
+      margin-bottom: 20px;
+    }
+    .bundle-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .bundle {
+      background: #1e293b;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease, border 0.3s ease;
+      border: 2px solid transparent;
+    }
+    .bundle:hover {
+      transform: translateY(-5px);
+      border-color: #38bdf8;
+    }
+    .bundle h4 {
+      color: #38bdf8;
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+    .price {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #facc15;
+      margin-bottom: 10px;
+    }
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    ul li {
+      margin-bottom: 6px;
+    }
+    em {
+      font-size: 0.9rem;
+      color: #94a3b8;
+    }
+  </style>
