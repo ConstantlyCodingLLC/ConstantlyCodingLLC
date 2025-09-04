@@ -41,7 +41,9 @@
       margin-bottom: 5px;
     }
 
-    input, textarea, select {
+    input,
+    textarea,
+    select {
       padding: 10px;
       border: none;
       border-radius: 8px;
@@ -86,6 +88,14 @@
 </head>
 
 <body>
+
+  <!-- Home Button -->
+  <div style="text-align:center; margin-bottom:20px;">
+    <a href="home.html" style="display:inline-block; padding:10px 20px; background:#38bdf8; color:#0b1120; font-weight:bold; border-radius:8px; text-decoration:none; transition:background 0.3s;">
+      Home
+    </a>
+  </div>
+
   <h1>App/Website Build Intake Form</h1>
 
   <form id="intake-form">
@@ -118,7 +128,6 @@
     <label>Target audience (age, location, interests):</label>
     <textarea name="audience" rows="2"></textarea>
 
-
     <!-- Features -->
     <label>What features are needed?</label>
     <textarea name="features" rows="3" placeholder="Example: Booking, E-Commerce, Contact Form, Blog, Gallery, Login"></textarea>
@@ -128,7 +137,7 @@
     <select name="logo">
       <option value="">Select</option>
       <option value="Yes">Yes</option>
-      <option value="No">No, I need help</option>
+      <option value="No, I need help">No, I need help</option>
     </select>
 
     <label>Preferred design style:</label>
@@ -211,4 +220,3 @@
 </body>
 
 </html>
-
