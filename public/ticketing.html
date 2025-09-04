@@ -104,6 +104,25 @@
       font-size: 1rem;
     }
 
+    /* Button Styles */
+    .ticket-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 25px;
+      background-color: #38bdf8;
+      color: #0b1120;
+      font-weight: bold;
+      font-family: 'Orbitron', sans-serif;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .ticket-btn:hover {
+      background-color: #0ea5e9;
+      transform: scale(1.05);
+    }
+
     footer {
       background: #1e2a47;
       text-align: center;
@@ -182,6 +201,11 @@
         <li>Real-time analytics and reporting</li>
         <li>User-friendly interface for both staff and customers</li>
       </ul>
+
+      <!-- Button to live ticketing system -->
+      <a href="https://ticketing-system-umber.vercel.app/" target="_blank" class="ticket-btn">
+        Try the Ticketing System
+      </a>
     </div>
   </main>
 
