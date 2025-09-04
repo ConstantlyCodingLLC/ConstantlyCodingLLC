@@ -12,13 +12,20 @@
 
   <!-- Styles -->
   <style>
-    body {
-      font-family: 'Roboto', sans-serif;
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
       background-color: #0f172a;
       color: #f1f5f9;
       line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
     header {
@@ -45,39 +52,45 @@
       color: #38bdf8;
     }
 
-    section {
-      max-width: 1100px;
-      margin: 0 auto;
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       padding: 40px 20px;
     }
 
-    h1 {
-      font-size: 2.2rem;
+    .content {
+      width: 100%;
+      max-width: 1200px;
       text-align: center;
+    }
+
+    h1 {
+      font-size: 2.6rem;
       color: #38bdf8;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
       font-family: 'Orbitron', sans-serif;
     }
 
     p {
-      text-align: center;
       margin-bottom: 25px;
-      font-size: 1.05rem;
+      font-size: 1.1rem;
       color: #cbd5e1;
     }
 
     h2 {
-      text-align: center;
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       margin-bottom: 15px;
       color: #94a3b8;
     }
 
     ul {
+      list-style: disc;
       max-width: 700px;
-      margin: 0 auto 40px auto;
+      margin: 0 auto;
       padding-left: 20px;
-      list-style-type: disc;
+      text-align: left;
     }
 
     ul li {
@@ -89,9 +102,40 @@
       background: #1e293b;
       text-align: center;
       padding: 20px;
-      margin-top: 40px;
       color: #94a3b8;
       font-size: 0.9rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      p, ul li {
+        font-size: 0.95rem;
+      }
     }
   </style>
 </head>
@@ -109,23 +153,25 @@
   </header>
 
   <!-- Main Section -->
-  <section>
-    <h1>Cable Running</h1>
-    <p>
-      CONSTANTLY CODING LLC provides professional cable running services for residential, commercial, and industrial environments. 
-      We specialize in structured cabling installations that ensure reliable, organized, and high-speed connections for all your 
-      networking and communication needs.
-    </p>
+  <main>
+    <div class="content">
+      <h1>Cable Running</h1>
+      <p>
+        CONSTANTLY CODING LLC provides professional cable running services for residential, commercial, and industrial environments. 
+        We specialize in structured cabling installations that ensure reliable, organized, and high-speed connections for all your 
+        networking and communication needs.
+      </p>
 
-    <h2>Features</h2>
-    <ul>
-      <li>Ethernet (Cat5/Cat6) cable installations</li>
-      <li>Server room wiring and cleanup</li>
-      <li>Wall plate and patch panel setup</li>
-      <li>Low-voltage and coaxial wiring</li>
-      <li>Testing and labeling</li>
-    </ul>
-  </section>
+      <h2>Features</h2>
+      <ul>
+        <li>Ethernet (Cat5/Cat6) cable installations</li>
+        <li>Server room wiring and cleanup</li>
+        <li>Wall plate and patch panel setup</li>
+        <li>Low-voltage and coaxial wiring</li>
+        <li>Testing and labeling</li>
+      </ul>
+    </div>
+  </main>
 
   <!-- Footer -->
   <footer>
