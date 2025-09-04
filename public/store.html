@@ -1,397 +1,360 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Store | CONSTANTLY CODING LLC</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Store | Constantly Coding LLC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
       font-family: 'Roboto', sans-serif;
-      color: white;
-      background-color: #0b1120;
-      overflow-x: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
-      text-align: center;
+      margin: 0;
+      padding: 0;
+      background-color: #0f172a;
+      color: #f1f5f9;
+      line-height: 1.6;
     }
-
     .store-container {
-      background-color: #1e293b;
-      border-radius: 16px;
-      padding: 40px 30px;
-      max-width: 800px;
-      width: 100%;
-      box-shadow: 0 0 25px rgba(56, 189, 248, 0.4);
-      animation: fadeIn 1.5s ease;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px 15px;
     }
-
-    .store-container h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 2.8rem;
-      color: #38bdf8;
-      margin-bottom: 20px;
-    }
-
-    .store-container h2 {
-      font-size: 1.5rem;
-      color: #e2e8f0;
-      margin-bottom: 20px;
-    }
-
-    .store-container p {
-      font-size: 1.1rem;
-      color: #cbd5e1;
-      margin-bottom: 30px;
-    }
-
-    .bundle-section {
-      text-align: left;
-      margin-top: 40px;
-    }
-
-    .bundle-section h3 {
-      font-family: 'Orbitron', sans-serif;
-      color: #38bdf8;
-      margin-bottom: 15px;
-      font-size: 1.8rem;
-      border-bottom: 2px solid #38bdf8;
-      padding-bottom: 6px;
-    }
-
-    .bundle {
-      background-color: #273549;
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 25px;
-      box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
-    }
-
-    .bundle h4 {
-      font-family: 'Orbitron', sans-serif;
-      color: #7dd3fc;
-      font-size: 1.4rem;
+    h1, h2 {
+      text-align: center;
       margin-bottom: 10px;
     }
-
-    .bundle p.price {
-      font-weight: 700;
-      color: #22d3ee;
-      margin-bottom: 12px;
-      font-size: 1.3rem;
+    h1 {
+      font-size: 2rem;
+      color: #38bdf8;
     }
-
-    .bundle ul {
-      list-style-type: disc;
-      margin-left: 20px;
-      color: #cbd5e1;
-      font-size: 1rem;
-      line-height: 1.5;
+    h2 {
+      font-size: 1.2rem;
+      color: #94a3b8;
+      margin-bottom: 20px;
     }
-
+    p.intro {
+      text-align: center;
+      margin-bottom: 25px;
+    }
     .cta-button {
-      display: inline-block;
-      padding: 12px 24px;
-      background-color: #38bdf8;
+      display: block;
+      text-align: center;
+      background: #38bdf8;
       color: #0f172a;
       font-weight: bold;
       text-decoration: none;
+      padding: 12px 25px;
       border-radius: 8px;
-      font-size: 1rem;
-      transition: background 0.3s ease;
+      max-width: 200px;
+      margin: 15px auto 40px;
+      transition: 0.3s ease;
     }
-
     .cta-button:hover {
-      background-color: #0ea5e9;
+      background: #22d3ee;
     }
-
-    footer {
-      margin-top: 40px;
-      color: #94a3b8;
+    .bundle-section {
+      margin: 40px 0;
+    }
+    .bundle-section h3 {
+      font-size: 1.5rem;
+      border-left: 4px solid #38bdf8;
+      padding-left: 10px;
+      margin-bottom: 20px;
+    }
+    .bundle-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .bundle {
+      background: #1e293b;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease, border 0.3s ease;
+      border: 2px solid transparent;
+    }
+    .bundle:hover {
+      transform: translateY(-5px);
+      border-color: #38bdf8;
+    }
+    .bundle h4 {
+      color: #38bdf8;
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+    .price {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #facc15;
+      margin-bottom: 10px;
+    }
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    ul li {
+      margin-bottom: 6px;
+    }
+    em {
       font-size: 0.9rem;
-      text-align: center;
-      font-weight: 600;
-    }
-
-    @keyframes fadeIn {
-      0% {
-        opacity: 0;
-        transform: translateY(15px);
-      }
-
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @media (max-width: 480px) {
-      .store-container {
-        padding: 30px 20px;
-      }
-
-      .store-container h1 {
-        font-size: 2rem;
-      }
-
-      .store-container h2 {
-        font-size: 1.2rem;
-      }
-
-      .store-container p {
-        font-size: 1rem;
-      }
-
-      .bundle-section {
-        text-align: center;
-      }
-
-      .bundle {
-        padding: 15px;
-      }
-
-      .bundle h4 {
-        font-size: 1.2rem;
-      }
-
-      .bundle p.price {
-        font-size: 1.1rem;
-      }
-
-      .bundle ul {
-        font-size: 0.9rem;
-        margin-left: 10px;
-      }
-
-      .cta-button {
-        width: 100%;
-        padding: 14px;
-        font-size: 1rem;
-      }
-
-      footer {
-        font-size: 0.8rem;
-      }
+      color: #94a3b8;
     }
   </style>
 </head>
-
 <body>
-
   <div class="store-container">
     <h1>The Store is Here</h1>
     <h2>Prices can be negotiated</h2>
-    <p>Affordable bundles made for mom & pop shops. Simple. Effective. Scalable.</p>
+    <p class="intro">Affordable bundles made for mom & pop shops. Simple. Effective. Scalable.</p>
+
     <a href="home.html" class="cta-button">Back to Home</a>
 
     <!-- Web & App Creation -->
-<section class="bundle-section">
-  <h3>Web & App Creation</h3>
-
-  <!-- Monthly Fee Special Deal -->
-  <div class="bundle" style="border: 2px solid #22d3ee;">
-    <h4 style="color:#22d3ee;">💡 Special Deal: Monthly Website Plan</h4>
-    <p class="price">$30/month</p>
-    <ul>
-      <li>Hosting Included</li>
-      <li>Domain Purchase Included</li>
-      <li>Free Website Upgrades</li>
-      <li>Free Tech Support</li>
-    </ul>
-    <p style="color: #94a3b8; margin-top: 10px;">
-      <em>*Additional $55 fee applies if you request more pages on the website</em>
-    </p>
-  </div>
-
-  <div class="bundle">
-    <h4>Starter Site</h4>
-    <p class="price">$300</p>
-    <ul>
-      <li>2-Page Responsive Website</li>
-      <li>Logo & Branding Included</li>
-      <li>Mobile Friendly Design</li>
-    </ul>
-  </div>
-
-  <div class="bundle">
-    <h4>Small Biz Website</h4>
-    <p class="price">$200</p>
-    <ul>
-      <li>2-Page Website</li>
-      <li>Logo & Branding</li>
-      <li>Mobile Friendly Design</li>
-       <li>Quote Page Included</li>
-    </ul>
-  </div>
-
-  <div class="bundle">
-    <h4>Basic App/Web Store</h4>
-    <p class="price">$400</p>
-    <ul>
-      <li>Basic App or Online Store</li>
-      <li>10 Products/Services</li>
-      <li>Bank Integration</li>
-       <li>Mobile Friendly Design</li>
-       <li>Logo/Store Design</li>
-    </ul>
-  </div>
-</section>
+    <section class="bundle-section">
+      <h3>Web & App Creation</h3>
+      <div class="bundle-grid">
+        <div class="bundle" style="border: 2px solid #22d3ee;">
+          <h4 style="color:#22d3ee;">💡 Special Deal: Monthly Website Plan</h4>
+          <p class="price">$30/month</p>
+          <ul>
+            <li>Hosting Included</li>
+            <li>Domain Purchase Included</li>
+            <li>Free Website Upgrades</li>
+            <li>Free Tech Support</li>
+          </ul>
+          <p><em>*Additional $55 fee applies if you request more pages on the website</em></p>
+        </div>
+        <div class="bundle">
+          <h4>Starter Site</h4>
+          <p class="price">$300</p>
+          <ul>
+            <li>2-Page Responsive Website</li>
+            <li>Logo & Branding Included</li>
+            <li>Mobile Friendly Design</li>
+          </ul>
+        </div>
+        <div class="bundle">
+          <h4>Small Biz Website</h4>
+          <p class="price">$200</p>
+          <ul>
+            <li>2-Page Website</li>
+            <li>Logo & Branding</li>
+            <li>Mobile Friendly Design</li>
+            <li>Quote Page Included</li>
+          </ul>
+        </div>
+        <div class="bundle">
+          <h4>Basic App/Web Store</h4>
+          <p class="price">$400</p>
+          <ul>
+            <li>Basic App or Online Store</li>
+            <li>10 Products/Services</li>
+            <li>Bank Integration</li>
+            <li>Mobile Friendly Design</li>
+            <li>Logo/Store Design</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
     <!-- Networking -->
     <section class="bundle-section">
       <h3>Networking</h3>
-
-      <div class="bundle">
-        <h4>Home Office Setup</h4>
-        <p class="price">$150–$300</p>
-        <ul>
-          <li>Router + Firewall Setup</li>
-          <li>Up to 5 Device Connections</li>
-          <li>Speed & Security Check</li>
-        </ul>
-      </div>
-
-      <div class="bundle">
-        <h4>Small Office Network</h4>
-        <p class="price">$500–$750</p>
-        <ul>
-          <li>Up to 10 Devices Connected</li>
-          <li>Switch & Guest WiFi Setup</li>
-          <li>Basic Diagram & Labeling</li>
-        </ul>
-      </div>
-
-      <div class="bundle">
-        <h4>Secure Office Plan</h4>
-        <p class="price">$1,000–$1,500</p>
-        <ul>
-          <li>15+ Devices, VLANs</li>
-          <li>Guest & Staff WiFi</li>
-          <li>Support for 30 Days</li>
-        </ul>
+      <div class="bundle-grid">
+        <div class="bundle">
+          <h4>Home Office Setup</h4>
+          <p class="price">$150–$300</p>
+          <ul>
+            <li>Router + Firewall Setup</li>
+            <li>Up to 5 Device Connections</li>
+            <li>Speed & Security Check</li>
+          </ul>
+        </div>
+        <div class="bundle">
+          <h4>Small Office Network</h4>
+          <p class="price">$500–$750</p>
+          <ul>
+            <li>Up to 10 Devices Connected</li>
+            <li>Switch & Guest WiFi Setup</li>
+            <li>Basic Diagram & Labeling</li>
+          </ul>
+        </div>
+        <div class="bundle">
+          <h4>Secure Office Plan</h4>
+          <p class="price">$1,000–$1,500</p>
+          <ul>
+            <li>15+ Devices, VLANs</li>
+            <li>Guest & Staff WiFi</li>
+            <li>Support for 30 Days</li>
+          </ul>
+        </div>
       </div>
     </section>
 
     <!-- Cabling -->
     <section class="bundle-section">
       <h3>Commercial Cabling (Ethernet)</h3>
-
-      <div class="bundle">
-        <h4>Basic Drop</h4>
-        <p class="price">$400–$650</p>
-        <ul>
-          <li>2–3 Ethernet Runs (Cat6)</li>
-          <li>Wall Plates + Testing</li>
-        </ul>
-      </div>
-
-      <div class="bundle">
-        <h4>Office Wiring</h4>
-        <p class="price">$950–$1,200</p>
-        <ul>
-          <li>5–8 Cable Drops</li>
-          <li>Tray Management + Labeling</li>
-        </ul>
-      </div>
-
-      <div class="bundle">
-        <h4>Full Wiring Package</h4>
-        <p class="price">$1,500–$2,000</p>
-        <ul>
-          <li>Up to 15 Cable Runs</li>
-          <li>Patch Panel + MDF/IDF Setup</li>
-        </ul>
+      <div class="bundle-grid">
+        <div class="bundle">
+          <h4>Basic Drop</h4>
+          <p class="price">$400–$650</p>
+          <ul>
+            <li>2–3 Ethernet Runs (Cat6)</li>
+            <li>Wall Plates + Testing</li>
+          </ul>
+        </div>
+        <div class="bundle">
+          <h4>Office Wiring</h4>
+          <p class="price">$950–$1,200</p>
+          <ul>
+            <li>5–8 Cable Drops</li>
+            <li>Tray Management + Labeling</li>
+          </ul>
+        </div>
+        <div class="bundle">
+          <h4>Full Wiring Package</h4>
+          <p class="price">$1,500–$2,000</p>
+          <ul>
+            <li>Up to 15 Cable Runs</li>
+            <li>Patch Panel + MDF/IDF Setup</li>
+          </ul>
+        </div>
       </div>
     </section>
 
     <!-- Ticketing System -->
     <section class="bundle-section">
       <h3>Ticketing System</h3>
-
-      <div class="bundle">
-        <h4>Basic Ticket System</h4>
-        <p class="price">$300–$450</p>
-        <ul>
-          <li>Email Support Tickets</li>
-          <li>Status Updates + Alerts</li>
-        </ul>
-      </div>
-
-      <div class="bundle">
-        <h4>Internal Ticket Suite</h4>
-        <p class="price">$600–$900</p>
-        <ul>
-          <li>Staff Assignment</li>
-          <li>Internal Notes + Attachments</li>
-        </ul>
-      </div>
-
-      <div class="bundle">
-        <h4>Advanced Ticketing</h4>
-        <p class="price">$1,000–$1,400</p>
-        <ul>
-          <li>Work Order Uploads</li>
-          <li>Analytics Dashboard</li>
-          <li>Customer Portal</li>
-        </ul>
+      <div class="bundle-grid">
+        <div class="bundle">
+          <h4>Basic Ticket System</h4>
+          <p class="price">$300–$450</p>
+          <ul>
+            <li>Email Support Tickets</li>
+            <li>Status Updates + Alerts</li>
+          </ul>
+        </div>
+        <div class="bundle">
+          <h4>Internal Ticket Suite</h4>
+          <p class="price">$600–$900</p>
+          <ul>
+            <li>Staff Assignment</li>
+            <li>Internal Notes + Attachments</li>
+          </ul>
+        </div>
+        <div class="bundle">
+          <h4>Advanced Ticketing</h4>
+          <p class="price">$1,000–$1,400</p>
+          <ul>
+            <li>Work Order Uploads</li>
+            <li>Analytics Dashboard</li>
+            <li>Customer Portal</li>
+          </ul>
+        </div>
       </div>
     </section>
 
     <!-- IT & Asset Management -->
     <section class="bundle-section">
       <h3>IT / Asset Management</h3>
-
-      <div class="bundle">
-        <h4>Inventory Tracker Lite</h4>
-        <p class="price">$300–$500</p>
-        <ul>
-          <li>Track 50–100 Items</li>
-          <li>CSV Export/Import</li>
-          <li>Barcode/QR Ready</li>
-        </ul>
-      </div>
-
-      <div class="bundle">
-        <h4>Asset Suite</h4>
-        <p class="price">$750–$1,100</p>
-        <ul>
-          <li>Asset Logs + Assignment</li>
-          <li>Service & Maintenance Alerts</li>
-        </ul>
-      </div>
-
-      <div class="bundle">
-        <h4>Smart Management Dashboard</h4>
-        <p class="price">$1,200–$1,800</p>
-        <ul>
-          <li>Central Dashboard</li>
-          <li>Login Roles + Warranty Tracker</li>
-          <li>Mobile Friendly</li>
-        </ul>
+      <div class="bundle-grid">
+        <div class="bundle">
+          <h4>Inventory Tracker Lite</h4>
+          <p class="price">$300–$500</p>
+          <ul>
+            <li>Track 50–100 Items</li>
+            <li>CSV Export/Import</li>
+            <li>Barcode/QR Ready</li>
+          </ul>
+        </div>
+        <div class="bundle">
+          <h4>Asset Suite</h4>
+          <p class="price">$750–$1,100</p>
+          <ul>
+            <li>Asset Logs + Assignment</li>
+            <li>Service & Maintenance Alerts</li>
+          </ul>
+        </div>
+        <div class="bundle">
+          <h4>Smart Management Dashboard</h4>
+          <p class="price">$1,200–$1,800</p>
+          <ul>
+            <li>Central Dashboard</li>
+            <li>Login Roles + Warranty Tracker</li>
+            <li>Mobile Friendly</li>
+          </ul>
+        </div>
       </div>
     </section>
 
+    <!-- Hot Shot Delivery -->
+    <section class="bundle-section">
+      <h3>Hot Shot Delivery</h3>
+      <div class="bundle-grid">
+        <div class="bundle">
+          <h4>Local Hot Shot</h4>
+          <p class="price">$75–$150</p>
+          <ul>
+            <li>Same-Day Local Delivery</li>
+            <li>Light Cargo / Equipment</li>
+            <li>Up to 50 Miles</li>
+          </ul>
+        </div>
+        <div class="bundle">
+          <h4>Regional Hot Shot</h4>
+          <p class="price">$200–$400</p>
+          <ul>
+            <li>Fast Regional Delivery</li>
+            <li>Heavy Equipment or Pallets</li>
+            <li>100–300 Miles Radius</li>
+          </ul>
+        </div>
+        <div class="bundle">
+          <h4>Priority Express</h4>
+          <p class="price">$500+</p>
+          <ul>
+            <li>Urgent Same-Day Requests</li>
+            <li>Direct Route — No Stops</li>
+            <li>Custom Scheduling</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trash Removal -->
+    <section class="bundle-section">
+      <h3>Trash Removal</h3>
+      <div class="bundle-grid">
+        <div class="bundle">
+          <h4>Residential Cleanout</h4>
+          <p class="price">$100–$250</p>
+          <ul>
+            <li>Furniture & Appliance Pickup</li>
+            <li>Garage or Yard Cleanouts</li>
+            <li>Load & Haul Away</li>
+          </ul>
+        </div>
+        <div class="bundle">
+          <h4>Commercial Junk Removal</h4>
+          <p class="price">$300–$600</p>
+          <ul>
+            <li>Office & Warehouse Trash</li>
+            <li>Construction Debris</li>
+            <li>On-Site Labor Included</li>
+          </ul>
+        </div>
+        <div class="bundle">
+          <h4>Roll-Off Dumpster Service</h4>
+          <p class="price">$500–$900</p>
+          <ul>
+            <li>Large-Scale Cleanouts</li>
+            <li>7-Day Dumpster Rental</li>
+            <li>Pickup & Disposal Included</li>
+          </ul>
+        </div>
+      </div>
+    </section>
   </div>
-
-  <footer>
-    <p>&copy; 2025 CONSTANTLY CODING LLC. All Rights Reserved.</p>
-  </footer>
-
 </body>
-
 </html>
-
