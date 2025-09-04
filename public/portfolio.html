@@ -8,7 +8,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    /* Base Styling */
     body {
       font-family: 'Roboto', sans-serif;
       background: linear-gradient(135deg, #0b1120, #1e293b);
@@ -19,7 +18,6 @@
       flex-direction: column;
     }
 
-    /* Navigation */
     nav {
       display: flex;
       justify-content: center;
@@ -46,7 +44,6 @@
       color: #38bdf8;
     }
 
-    /* Section Layout */
     section {
       flex: 1;
       padding: 60px 20px;
@@ -54,7 +51,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
     }
 
     h1 {
@@ -72,7 +68,6 @@
       margin: 40px 0 20px;
     }
 
-    /* Logo */
     .logo {
       margin: 20px 0 40px;
     }
@@ -89,13 +84,13 @@
       transform: scale(1.05);
     }
 
-    /* Projects Grid */
     .projects {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 30px;
       width: 100%;
       max-width: 1100px;
+      margin-bottom: 60px;
     }
 
     .project {
@@ -139,7 +134,6 @@
       background: #0ea5e9;
     }
 
-    /* Footer */
     footer {
       background-color: #1e2a47;
       text-align: center;
@@ -159,7 +153,6 @@
     <a href="portfolio.html">Our Work</a>
   </nav>
 
-  <!-- Portfolio Section -->
   <section>
     <h1>Our Work</h1>
 
@@ -177,7 +170,7 @@
         <p>BOSJ Enterprise helps individuals and businesses navigate tax and financial decisions with confidence.</p>
         <a href="https://bosj-enterprise.vercel.app/" target="_blank">View Project</a>
       </div>
-
+    </div>
 
     <!-- Logos/Emblems Section -->
     <h2>Logos & Emblems</h2>
@@ -185,15 +178,16 @@
       <div class="project">
         <h3>Underdog Corporations</h3>
         <div class="logo">
-          <img src="https://cdn.discordapp.com/attachments/1116573921408458794/1413007123834474496/ChatGPT_Image_Sep_3_2025_10_46_06_PM.png?ex=68ba5cee&is=68b90b6e&hm=e24faef016a2cb8937ceff9e360749964c80e17d0043fee72ab14a2480d9f1e1" alt="Constantly Coding LLC Logo">
+          <img src="images/logo.png" alt="Underdog Corporations Logo">
         </div>
       </div>
-      <!-- Add more logos/emblems here if needed -->
+      <!-- Add more logos/emblems here -->
     </div>
 
-    
-  <h2>Apps</h2>
-         <div class="project">
+    <!-- Apps Section -->
+    <h2>Apps</h2>
+    <div class="projects">
+      <div class="project">
         <h3>Ticketing System App</h3>
         <p>A user-friendly ticketing system designed for small businesses and mom-and-pop shops to manage support tickets efficiently.</p>
         <a href="https://ticketing-system-umber.vercel.app/" target="_blank">View Project</a>
