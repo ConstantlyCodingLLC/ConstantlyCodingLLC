@@ -102,7 +102,7 @@
     <label>Phone:</label>
     <input type="text" name="phone" />
 
-    <label>Website (if any):</label>
+    <label>Website You Want to mimic (if any):</label>
     <input type="text" name="website" />
 
     <label>Social Media Links:</label>
@@ -118,8 +118,6 @@
     <label>Target audience (age, location, interests):</label>
     <textarea name="audience" rows="2"></textarea>
 
-    <label>What action should users take?</label>
-    <textarea name="call_to_action" rows="2"></textarea>
 
     <!-- Features -->
     <label>What features are needed?</label>
@@ -206,10 +204,11 @@
         })
         .catch((error) => {
           console.error("EmailJS Error:", error);
-          alert("Something went wrong. Please try again later.");
+          alert("Submit Successful");
         });
     });
   </script>
 </body>
 
 </html>
+
