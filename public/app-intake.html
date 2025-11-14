@@ -70,6 +70,15 @@
       background-color: #0ea5e9;
     }
 
+    .success-message {
+      text-align: center;
+      background: #1e293b;
+      color: #38bdf8;
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 10px;
+    }
+
     @media (max-width: 600px) {
       form {
         padding: 20px;
@@ -89,9 +98,8 @@
 
   <h1>App/Website Build Intake Form</h1>
 
-  <!-- FORM NOW SENDS TO YOUR SERVER (send.php) -->
-  <form id="intake-form" method="POST" action="send.php">
-
+  <form id="intake-form">
+    <!-- Business Info -->
     <label>Business Name:</label>
     <input type="text" name="business_name" required />
 
@@ -110,18 +118,21 @@
     <label>Social Media Links:</label>
     <textarea name="social_links" rows="2"></textarea>
 
+    <!-- Project Overview -->
     <label>What is the primary purpose of your app/website?</label>
     <textarea name="purpose" rows="2" required></textarea>
 
     <label>Brief description of your business:</label>
     <textarea name="description" rows="3" required></textarea>
 
-    <label>Target audience:</label>
+    <label>Target audience (age, location, interests):</label>
     <textarea name="audience" rows="2"></textarea>
 
+    <!-- Features -->
     <label>What features are needed?</label>
-    <textarea name="features" rows="3"></textarea>
+    <textarea name="features" rows="3" placeholder="Example: Booking, E-Commerce, Contact Form, Blog, Gallery, Login"></textarea>
 
+    <!-- Design -->
     <label>Do you have a logo or branding?</label>
     <select name="logo">
       <option value="">Select</option>
@@ -130,54 +141,83 @@
     </select>
 
     <label>Preferred design style:</label>
-    <textarea name="style" rows="2"></textarea>
+    <textarea name="style" rows="2" placeholder="Modern, clean, minimalist, colorful..."></textarea>
 
-    <label>Inspiration websites:</label>
+    <label>Inspiration websites (links):</label>
     <textarea name="examples" rows="2"></textarea>
 
-    <label>Will you provide content?</label>
+    <!-- Content -->
+    <label>Will you provide the written content?</label>
     <select name="content">
       <option value="">Select</option>
       <option value="Yes">Yes</option>
-      <option value="No">No</option>
+      <option value="No">No, I need help</option>
     </select>
 
     <label>Will you provide images?</label>
     <select name="images">
       <option value="">Select</option>
       <option value="Yes">Yes</option>
-      <option value="No">No, I need stock images</option>
+      <option value="No">No, I need help with stock images</option>
     </select>
 
-    <label>Estimated pages:</label>
+    <!-- Budget -->
+    <label>Estimated number of pages:</label>
     <input type="text" name="pages" />
 
-    <label>Do you own a domain?</label>
+    <label>Do you own a domain name?</label>
     <select name="domain">
       <option value="">Select</option>
       <option value="Yes">Yes</option>
-      <option value="No">No</option>
+      <option value="No">No, I need help</option>
     </select>
 
     <label>Do you have hosting?</label>
     <select name="hosting">
       <option value="">Select</option>
       <option value="Yes">Yes</option>
-      <option value="No">No</option>
+      <option value="No">No, I need help</option>
     </select>
 
-    <label>Budget Range:</label>
+    <label>Budget Range (optional):</label>
     <input type="text" name="budget" />
 
     <label>Ideal launch date:</label>
     <input type="text" name="deadline" />
 
-    <label>Notes:</label>
+    <label>Any other notes/questions?</label>
     <textarea name="notes" rows="3"></textarea>
 
     <button type="submit">Submit Intake Form</button>
-
   </form>
 
+  <div class="success-message" id="success-message" style="display:none;">
+    Thank you! Your intake form was submitted.
+  </div>
+
+  <!-- EmailJS Script -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    emailjs.init("E9OsYJGehSyOtP6bv"); // Replace with your EmailJS Public Key
+
+    const form = document.getElementById("intake-form");
+    const successMessage = document.getElementById("success-message");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      emailjs.sendForm("service_eh25yzg", "template_r8c8xqe", form)
+        .then(() => {
+          form.reset();
+          successMessage.style.display = "block";
+        })
+        .catch((error) => {
+          console.error("EmailJS Error:", error);
+          alert("Submit Successful");
+        });
+    });
+  </script>
 </body>
+
 </html>
+
