@@ -195,29 +195,10 @@
     Thank you! Your intake form was submitted.
   </div>
 
-  <!-- EmailJS Script -->
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-  <script>
-    emailjs.init("E9OsYJGehSyOtP6bv"); // Replace with your EmailJS Public Key
+<form id="intake-form" action="send_email.php" method="POST">
 
-    const form = document.getElementById("intake-form");
-    const successMessage = document.getElementById("success-message");
-
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      emailjs.sendForm("service_eh25yzg", "template_r8c8xqe", form)
-        .then(() => {
-          form.reset();
-          successMessage.style.display = "block";
-        })
-        .catch((error) => {
-          console.error("EmailJS Error:", error);
-          alert("Submit Successful");
-        });
-    });
-  </script>
 </body>
 
 </html>
+
 
