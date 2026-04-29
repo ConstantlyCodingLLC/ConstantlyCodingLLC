@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Constantly Coding LLC - Trucking Service</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #e5e7eb;
+    }
+    header {
+      background: #111827;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 2px solid #1f2937;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+    header p {
+      margin: 5px 0 0;
+      color: #93c5fd;
+    }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+    }
+    .card {
+      background: #111827;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #1f2937;
+    }
+    h2 {
+      color: #60a5fa;
+    }
+    ul {
+      line-height: 1.8;
+    }
+    .quote-btn {
+      background: #2563eb;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+      margin-top: 10px;
+    }
+    .quote-btn:hover {
+      background: #1d4ed8;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #374151;
+      background: #0b1220;
+      color: white;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #9ca3af;
+      font-size: 14px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 5px 10px;
+      background: #1d4ed8;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Constantly Coding LLC</h1>
+  <p>Logistics • Technology • Local Oklahoma Hauling</p>
+  <div class="badge">USDOT #4574393</div>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>Our Services</h2>
+    <ul>
+      <li>Local Oklahoma Pickup & Delivery (Light Freight)</li>
+      <li>Construction Material Hauling</li>
+      <li>Appliance & Furniture Transport</li>
+      <li>Same-Day Emergency Deliveries</li>
+      <li>IT Services & Software Development</li>
+      <li>Business Systems & Ticketing Software</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Request a Quote</h2>
+    <form onsubmit="sendEmail(event)">
+      <label>Name</label>
+      <input type="text" id="name" required />
+
+      <label>Email</label>
+      <input type="email" id="email" required />
+
+      <label>Service Needed</label>
+      <input type="text" id="service" placeholder="e.g. delivery, hauling, IT service" required />
+
+      <label>Details</label>
+      <textarea id="message" rows="5" placeholder="Tell us what you need..." required></textarea>
+
+      <button class="quote-btn" type="submit">Send Quote Request</button>
+    </form>
+  </div>
+
+</div>
+
+<footer>
+  Contact: constantlycodingllc@gmail.com | Wesley Mathis, Founder & CEO
+</footer>
+
+<script>
+function sendEmail(e) {
+  e.preventDefault();
+
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const service = document.getElementById('service').value;
+  const message = document.getElementById('message').value;
+
+  const subject = `New Quote Request from ${name}`;
+  const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0AService: ${service}%0D%0A%0D%0ADetails:%0D%0A${message}`;
+
+  window.location.href = `mailto:constantlycodingllc@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+}
+</script>
+
+</body>
+</html>
