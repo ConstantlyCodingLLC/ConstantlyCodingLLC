@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Constantly Coding LLC - Trucking Service</title>
+
   <style>
     body {
       margin: 0;
@@ -11,25 +12,38 @@
       background: #0f172a;
       color: #e5e7eb;
     }
+
     header {
       background: #111827;
       padding: 20px;
       text-align: center;
       border-bottom: 2px solid #1f2937;
     }
+
     header h1 {
       margin: 0;
       font-size: 28px;
     }
+
     header p {
       margin: 5px 0 0;
       color: #93c5fd;
     }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 10px;
+      background: #1d4ed8;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+
     .container {
       max-width: 1000px;
       margin: auto;
       padding: 20px;
     }
+
     .card {
       background: #111827;
       padding: 20px;
@@ -37,27 +51,16 @@
       margin-bottom: 20px;
       border: 1px solid #1f2937;
     }
+
     h2 {
       color: #60a5fa;
     }
+
     ul {
       line-height: 1.8;
     }
-    .quote-btn {
-      background: #2563eb;
-      color: white;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 16px;
-      width: 100%;
-      margin-top: 10px;
-    }
-    .quote-btn:hover {
-      background: #1d4ed8;
-    }
-    input, textarea {
+
+    input, textarea, select {
       width: 100%;
       padding: 10px;
       margin-top: 8px;
@@ -67,21 +70,37 @@
       background: #0b1220;
       color: white;
     }
+
+    .quote-btn {
+      background: #2563eb;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    .quote-btn:hover {
+      background: #1d4ed8;
+    }
+
+    .result {
+      font-size: 18px;
+      color: #22c55e;
+      margin-bottom: 15px;
+    }
+
     footer {
       text-align: center;
       padding: 20px;
       color: #9ca3af;
       font-size: 14px;
     }
-    .badge {
-      display: inline-block;
-      padding: 5px 10px;
-      background: #1d4ed8;
-      border-radius: 5px;
-      margin-top: 10px;
-    }
   </style>
 </head>
+
 <body>
 
 <header>
@@ -92,6 +111,7 @@
 
 <div class="container">
 
+  <!-- SERVICES -->
   <div class="card">
     <h2>Our Services</h2>
     <ul>
@@ -104,20 +124,51 @@
     </ul>
   </div>
 
+  <!-- HOTSHOT CALCULATOR -->
+  <div class="card">
+    <h2>🚛 Hotshot Pricing & Instant Quote</h2>
+
+    <p><strong>Base Rate:</strong> $100</p>
+    <p><strong>Mileage:</strong> $2.00 per mile</p>
+
+    <label>Miles (One Way)</label>
+    <input type="number" id="miles" placeholder="Enter miles">
+
+    <label>Service Type</label>
+    <select id="serviceType">
+      <option value="100">Quick Load ($100)</option>
+      <option value="150">Priority Haul ($150)</option>
+      <option value="200">Dedicated Run ($200)</option>
+    </select>
+
+    <label>Load Type</label>
+    <select id="loadType">
+      <option value="0">Standard</option>
+      <option value="50">Heavy (+$50)</option>
+      <option value="100">Oversized (+$100)</option>
+    </select>
+
+    <button class="quote-btn" onclick="calculatePrice()">Calculate Price</button>
+
+    <div class="result" id="totalPrice">Total: $0</div>
+  </div>
+
+  <!-- CONTACT FORM -->
   <div class="card">
     <h2>Request a Quote</h2>
+
     <form onsubmit="sendEmail(event)">
       <label>Name</label>
-      <input type="text" id="name" required />
+      <input type="text" id="name" required>
 
       <label>Email</label>
-      <input type="email" id="email" required />
+      <input type="email" id="email" required>
 
       <label>Service Needed</label>
-      <input type="text" id="service" placeholder="e.g. delivery, hauling, IT service" required />
+      <input type="text" id="service" placeholder="e.g. delivery, hauling" required>
 
       <label>Details</label>
-      <textarea id="message" rows="5" placeholder="Tell us what you need..." required></textarea>
+      <textarea id="message" rows="5" required></textarea>
 
       <button class="quote-btn" type="submit">Send Quote Request</button>
     </form>
@@ -130,6 +181,18 @@
 </footer>
 
 <script>
+let calculatedTotal = 0;
+
+function calculatePrice() {
+  const miles = parseFloat(document.getElementById('miles').value) || 0;
+  const service = parseFloat(document.getElementById('serviceType').value);
+  const load = parseFloat(document.getElementById('loadType').value);
+
+  calculatedTotal = service + (miles * 2) + load;
+
+  document.getElementById('totalPrice').innerText = "Total: $" + calculatedTotal;
+}
+
 function sendEmail(e) {
   e.preventDefault();
 
@@ -138,10 +201,22 @@ function sendEmail(e) {
   const service = document.getElementById('service').value;
   const message = document.getElementById('message').value;
 
-  const subject = `New Quote Request from ${name}`;
-  const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0AService: ${service}%0D%0A%0D%0ADetails:%0D%0A${message}`;
+  const miles = document.getElementById('miles').value || "N/A";
+  const total = calculatedTotal || "Not calculated";
 
-  window.location.href = `mailto:constantlycodingllc@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+  const subject = `New Quote Request from ${name}`;
+
+  const body =
+`Name: ${name}
+Email: ${email}
+Service: ${service}
+Miles: ${miles}
+Estimated Price: $${total}
+
+Details:
+${message}`;
+
+  window.location.href = `mailto:constantlycodingllc@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 </script>
 
